@@ -1,0 +1,28 @@
+﻿  stdafx.cpp
+  book.cpp
+  Game.cpp
+  Learning.cpp
+c:\users\zly07\source\repos\othello\game\game\learning.cpp(23): warning C4267: '=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\learning.cpp(467): warning C4267: '=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\learning.cpp(940): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\learning.cpp(958): warning C4267: '=': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\learning.cpp(1122): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\learning.cpp(1133): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  Maths.cpp
+  Othello.cpp
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14001): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14003): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14029): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14031): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14068): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14070): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14109): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(14114): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(18156): warning C4244: '=': '__int64' から 'int' への変換です。データが失われる可能性があります。
+  Tree.cpp
+c:\users\zly07\source\repos\othello\game\game\tree.cpp(128): warning C4244: '=': '__int64' から 'int' への変換です。データが失われる可能性があります。
+  コード生成しています。
+c:\users\zly07\source\repos\othello\game\game\othello.cpp(12206): warning C4715: 'Board::xin': 値を返さないコントロール パスがあります。
+  All 1415 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  コード生成が終了しました。
+  Game.vcxproj -> C:\Users\zly07\source\repos\Othello\Game\x64\Release\Game.exe

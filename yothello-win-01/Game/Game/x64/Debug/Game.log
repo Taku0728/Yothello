@@ -1,0 +1,11 @@
+﻿  Othello.cpp
+c:\users\zly07\source\repos\game\game\othello.cpp(13304): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13306): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13332): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13334): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13371): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13373): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13412): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(13417): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+c:\users\zly07\source\repos\game\game\othello.cpp(17132): warning C4244: '=': '__int64' から 'int' への変換です。データが失われる可能性があります。
+  Game.vcxproj -> C:\Users\zly07\source\repos\Game\x64\Debug\Game.exe
