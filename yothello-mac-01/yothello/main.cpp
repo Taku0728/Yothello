@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	int player;
 	int type;
-	
+
 	cout <<
 	"--- YOTHELLO ---" << endl <<
 	"-1 -> ij : PASS" << endl <<
@@ -204,14 +204,10 @@ int input(int &mode)
 		else if (ij != -1 && ij != -2 && ij != -3) {
 			i = int(ij / 10);
 			j = ij % 10;
-			if (i < 0 || i>7 || j < 0 || j>7) {
+			if (i < 0 || i > 7 || j < 0 || j > 7) {
 				cout << "0 <= i <= 7 , 0 <= j <= 7" << endl;
 				stay = true;
 			}
-		}
-		else {
-			cout << "0 <= i <= 7 , 0 <= j <= 7" << endl;
-			stay = true;
 		}
 	}
 	return ij;

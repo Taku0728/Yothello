@@ -1,6 +1,6 @@
-// stdafx.h : •W€‚ÌƒVƒXƒeƒ€ ƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹A‚Ü‚½‚Í
-// ŽQÆ‰ñ”‚ª‘½‚­A‚©‚Â‚ ‚Ü‚è•ÏX‚³‚ê‚È‚¢AƒvƒƒWƒFƒNƒgê—p‚ÌƒCƒ“ƒNƒ‹[ƒh ƒtƒ@ƒCƒ‹
-// ‚ð‹Lq‚µ‚Ü‚·B
+// stdafx.h : ï¿½Wï¿½ï¿½ï¿½ÌƒVï¿½Xï¿½eï¿½ï¿½ ï¿½Cï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ÌƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Aï¿½Ü‚ï¿½ï¿½ï¿½
+// ï¿½Qï¿½Æ‰ñ”‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Â‚ï¿½ï¿½Ü‚ï¿½ÏXï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Aï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½pï¿½ÌƒCï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½[ï¿½h ï¿½tï¿½@ï¿½Cï¿½ï¿½
+// ï¿½ï¿½Lï¿½qï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 //
 
 #ifndef INCLUDED_stdafx_h_
@@ -23,7 +23,7 @@
 #include <sstream>
 #include <time.h>
 #include <stdlib.h>
-#include <cmath> 
+#include <cmath>
 #include <windows.h>
 
 template<typename A, size_t N, typename T>
@@ -35,4 +35,4 @@ void Fill(A(&array)[N], const T &val) {
 
 #endif
 
-// TODO: ƒvƒƒOƒ‰ƒ€‚É•K—v‚È’Ç‰Áƒwƒbƒ_[‚ð‚±‚±‚ÅŽQÆ‚µ‚Ä‚­‚¾‚³‚¢
+// TODO: ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½É•Kï¿½vï¿½È’Ç‰ï¿½ï¿½wï¿½bï¿½_ï¿½[ï¿½ï¿½ï¿½ï¿½ÅŽQï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
