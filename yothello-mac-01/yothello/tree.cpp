@@ -361,7 +361,7 @@ void Play::runab()
 	
 	//���ȏ�
 	else {
-		vector<vector<double>> v(move_choices);
+		vector< vector<double> > v(move_choices);
 		int n(0);
 		for (int i(0);i < 8;++i) {
 			for (int j(0);j < 8;++j) {
@@ -377,22 +377,22 @@ void Play::runab()
 		
 		//�\�[�g����
 		if (level < 55) {
+			int mini(2*int((depth[level] - 8)/2));
 			for (int n(0); n < move_choices; ++n) {
 				Board b2(b);
 				b2.move_board(int(v[n][1] + 0.5), int(v[n][2] + 0.5));
-				double y;
-				if (neu[level + 1].nodes[0] == 266) {
-					y = -neu[level + 1].Forward(b2.x266())[0];
+				double y(0);
+				if (mini > 0) {
+					y = -Alpbet(b2, neu, level + 1, mini, -999, 999);
 				}
-				else if (neu[level + 1].nodes[0] == 206) {
-					y = -neu[level + 1].Forward(b2.x206())[0];
-				}
-				else if (neu[level + 1].nodes[0] == 102) {
-					y = -neu[level + 1].Forward(b2.x102())[0];
+				else {
+					vector<double> x;
+					x = b2.xin(neu[level].nodes[0]);
+					y = -neu[level + 1].Forward(x)[0];
 				}
 				v[n][0] = y;
 			}
-			sort(v.begin(), v.end());
+			std::sort(v.begin(), v.end());
 			std::reverse(v.begin(), v.end());
 		}
 		
@@ -515,7 +515,7 @@ void Play::runabwithbook()
 	
 	//���ȏ�
 	else {
-		vector<vector<double>> v(move_choices);
+		vector<vector<double> > v(move_choices);
 		int n(0);
 		for (int i(0);i < 8;++i) {
 			for (int j(0);j < 8;++j) {
@@ -531,18 +531,18 @@ void Play::runabwithbook()
 		
 		//�\�[�g����
 		if (level < 55) {
+			int mini(2*int((depth[level] - 8)/2));
 			for (int n(0); n < move_choices; ++n) {
 				Board b2(b);
 				b2.move_board(int(v[n][1] + 0.5), int(v[n][2] + 0.5));
-				double y;
-				if (neu[level + 1].nodes[0] == 266) {
-					y = -neu[level + 1].Forward(b2.x266())[0];
+				double y(0);
+				if (mini > 0) {
+					y = -Alpbet(b2, neu, level + 1, mini, -999, 999);
 				}
-				else if (neu[level + 1].nodes[0] == 206) {
-					y = -neu[level + 1].Forward(b2.x206())[0];
-				}
-				else if (neu[level + 1].nodes[0] == 102) {
-					y = -neu[level + 1].Forward(b2.x102())[0];
+				else {
+					vector<double> x;
+					x = b2.xin(neu[level].nodes[0]);
+					y = -neu[level + 1].Forward(x)[0];
 				}
 				v[n][0] = y;
 			}
@@ -553,9 +553,7 @@ void Play::runabwithbook()
 		bestval = -999;
 		//���̃m�[�h��
 		for (int n(0);n < move_choices;++n) {
-			Abwd abwd;
 			Board b2(b);
-			abwd.elim_width = elim_width;
 			b2.move_board(int(v[n][1] + 0.5), int(v[n][2] + 0.5));
 			double nextval;
 			int num = book.number(level + 1, b2.turn, b2.square);
