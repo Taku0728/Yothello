@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "__split_buffer": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp"
+    }
+}
