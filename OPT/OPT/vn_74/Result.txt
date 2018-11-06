@@ -1,0 +1,2396 @@
+Level    : 64
+TDG time : 11560
+OPT time : 213
+
+Level    : 63
+TDG time : 10418
+OPT time : 216
+
+Level    : 62
+TDG time : 10799
+OPT time : 210
+
+Level    : 61
+TDG time : 11538
+OPT time : 222
+
+Level    : 60
+TDG time : 13726
+OPT time : 208
+
+Level    : 59
+TDG time : 22667
+OPT time : 219
+
+Level    : 64
+TDG time : 10746
+OPT time : 214
+
+Level    : 64
+TDG time : 10226
+OPT time : 212
+
+Level    : 64
+TDG time : 10253
+OPT time : 213
+
+Level    : 64
+TDG time : 10244
+OPT time : 211
+
+Level    : 64
+TDG time : 10237
+OPT time : 210
+
+Level    : 64
+TDG time : 10237
+OPT time : 216
+
+Level    : 64
+TDG time : 10233
+OPT time : 212
+
+Level    : 64
+TDG time : 10225
+OPT time : 209
+
+Level    : 63
+TDG time : 10389
+OPT time : 220
+
+Level    : 63
+TDG time : 10321
+OPT time : 215
+
+Level    : 63
+TDG time : 10321
+OPT time : 222
+
+Level    : 63
+TDG time : 10369
+OPT time : 213
+
+Level    : 63
+TDG time : 10385
+OPT time : 215
+
+Level    : 63
+TDG time : 10439
+OPT time : 211
+
+Level    : 63
+TDG time : 10325
+OPT time : 210
+
+Level    : 63
+TDG time : 10312
+OPT time : 210
+
+Level    : 62
+TDG time : 14652
+OPT time : 257
+
+Level    : 62
+TDG time : 13064
+OPT time : 228
+
+Level    : 62
+TDG time : 11225
+OPT time : 236
+
+Level    : 62
+TDG time : 11054
+OPT time : 229
+
+Level    : 62
+TDG time : 10963
+OPT time : 219
+
+Level    : 62
+TDG time : 11099
+OPT time : 229
+
+Level    : 62
+TDG time : 10966
+OPT time : 225
+
+Level    : 62
+TDG time : 10981
+OPT time : 217
+
+Level    : 61
+TDG time : 11981
+OPT time : 215
+
+Level    : 61
+TDG time : 11723
+OPT time : 212
+
+Level    : 61
+TDG time : 11719
+OPT time : 216
+
+Level    : 61
+TDG time : 11688
+OPT time : 218
+
+Level    : 61
+TDG time : 11721
+OPT time : 219
+
+Level    : 61
+TDG time : 15319
+OPT time : 220
+
+Level    : 61
+TDG time : 12131
+OPT time : 215
+
+Level    : 61
+TDG time : 12516
+OPT time : 261
+
+Level    : 60
+TDG time : 15985
+OPT time : 249
+
+Level    : 60
+TDG time : 14284
+OPT time : 242
+
+Level    : 60
+TDG time : 14257
+OPT time : 224
+
+Level    : 60
+TDG time : 14605
+OPT time : 264
+
+Level    : 60
+TDG time : 14155
+OPT time : 218
+
+Level    : 60
+TDG time : 13813
+OPT time : 213
+
+Level    : 60
+TDG time : 16143
+OPT time : 338
+
+Level    : 60
+TDG time : 14831
+OPT time : 236
+
+Level    : 59
+TDG time : 23079
+OPT time : 212
+
+Level    : 59
+TDG time : 22211
+OPT time : 208
+
+Level    : 59
+TDG time : 22223
+OPT time : 206
+
+Level    : 59
+TDG time : 25187
+OPT time : 257
+
+Level    : 59
+TDG time : 25948
+OPT time : 209
+
+Level    : 59
+TDG time : 25026
+OPT time : 253
+
+Level    : 59
+TDG time : 22575
+OPT time : 221
+
+Level    : 59
+TDG time : 25432
+OPT time : 219
+
+Level    : 58
+TDG time : 77055
+OPT time : 262
+
+Level    : 58
+TDG time : 66325
+OPT time : 232
+
+Level    : 58
+TDG time : 66441
+OPT time : 251
+
+Level    : 58
+TDG time : 81401
+OPT time : 318
+
+Level    : 58
+TDG time : 69995
+OPT time : 273
+
+Level    : 58
+TDG time : 83220
+OPT time : 268
+
+Level    : 58
+TDG time : 72833
+OPT time : 274
+
+Level    : 58
+TDG time : 68952
+OPT time : 299
+
+Level    : 57
+TDG time : 270173
+OPT time : 223
+
+Level    : 57
+TDG time : 272421
+OPT time : 212
+
+Level    : 57
+TDG time : 275847
+OPT time : 219
+
+Level    : 57
+TDG time : 271956
+OPT time : 221
+
+Level    : 57
+TDG time : 265303
+OPT time : 219
+
+Level    : 57
+TDG time : 263095
+OPT time : 215
+
+Level    : 57
+TDG time : 263334
+OPT time : 208
+
+Level    : 57
+TDG time : 265024
+OPT time : 221
+
+Level    : 64
+TDG time : 2359
+OPT time : 53
+
+Level    : 63
+TDG time : 2124
+OPT time : 50
+
+Level    : 62
+TDG time : 2189
+OPT time : 54
+
+Level    : 61
+TDG time : 2339
+OPT time : 54
+
+Level    : 60
+TDG time : 2799
+OPT time : 53
+
+Level    : 59
+TDG time : 4514
+OPT time : 52
+
+Level    : 58
+TDG time : 13202
+OPT time : 52
+
+Level    : 57
+TDG time : 54065
+OPT time : 51
+
+Level    : 56
+TDG time : 279090
+OPT time : 65
+
+Level    : 56
+TDG time : 552610
+OPT time : 147
+
+Level    : 64
+TDG time : 5678
+OPT time : 27
+
+Level    : 63
+TDG time : 6242
+OPT time : 26
+
+Level    : 62
+TDG time : 2179
+OPT time : 29
+
+Level    : 61
+TDG time : 2276
+OPT time : 26
+
+Level    : 60
+TDG time : 2595
+OPT time : 27
+
+Level    : 59
+TDG time : 4191
+OPT time : 32
+
+Level    : 58
+TDG time : 11292
+OPT time : 34
+
+Level    : 57
+TDG time : 33635
+OPT time : 27
+
+Level    : 56
+TDG time : 155338
+OPT time : 32
+
+Level    : 55
+TDG time : 946071
+OPT time : 39
+
+Level    : 55
+TDG time : 36269
+OPT time : 14
+
+Level    : 55
+TDG time : 45098
+OPT time : 13
+
+Level    : 54
+TDG time : 89593
+OPT time : 16
+
+Level    : 56
+TDG time : 274989
+OPT time : 41
+
+Level    : 56
+TDG time : 271250
+OPT time : 42
+
+Level    : 56
+TDG time : 276773
+OPT time : 43
+
+Level    : 55
+TDG time : 481052
+OPT time : 45
+
+Level    : 55
+TDG time : 486820
+OPT time : 41
+
+Level    : 55
+TDG time : 475259
+OPT time : 42
+
+Level    : 54
+TDG time : 557252
+OPT time : 63
+
+Level    : 54
+TDG time : 472377
+OPT time : 47
+
+Level    : 54
+TDG time : 464488
+OPT time : 47
+
+Level    : 53
+TDG time : 858988
+OPT time : 48
+
+Level    : 53
+TDG time : 1143612
+OPT time : 53
+
+Level    : 53
+TDG time : 1124830
+OPT time : 47
+
+Level    : 52
+TDG time : 312203
+OPT time : 112
+
+Level    : 52
+TDG time : 204872
+OPT time : 47
+
+Level    : 52
+TDG time : 215561
+OPT time : 48
+
+Level    : 51
+TDG time : 367398
+OPT time : 55
+
+Level    : 51
+TDG time : 305679
+OPT time : 146
+
+Level    : 51
+TDG time : 297537
+OPT time : 48
+
+Level    : 56
+TDG time : 842602
+OPT time : 49
+
+Level    : 56
+TDG time : 825235
+OPT time : 47
+
+Level    : 56
+TDG time : 985162
+OPT time : 56
+
+Level    : 55
+TDG time : 287526
+OPT time : 53
+
+Level    : 55
+TDG time : 866055
+OPT time : 52
+
+Level    : 55
+TDG time : 329275
+OPT time : 47
+
+Level    : 55
+TDG time : 288699
+OPT time : 51
+
+Level    : 54
+TDG time : 517356
+OPT time : 54
+
+Level    : 56
+TDG time : 280650
+OPT time : 46
+
+Level    : 56
+TDG time : 284002
+OPT time : 49
+
+Level    : 56
+TDG time : 306279
+OPT time : 48
+
+Level    : 64
+TDG time : 4253
+OPT time : 84
+
+Level    : 63
+TDG time : 4009
+OPT time : 87
+
+Level    : 62
+TDG time : 4145
+OPT time : 86
+
+Level    : 61
+TDG time : 4427
+OPT time : 104
+
+Level    : 60
+TDG time : 5330
+OPT time : 86
+
+Level    : 59
+TDG time : 9344
+OPT time : 85
+
+Level    : 58
+TDG time : 25281
+OPT time : 96
+
+Level    : 57
+TDG time : 105834
+OPT time : 80
+
+Level    : 55
+TDG time : 207481
+OPT time : 86
+
+Level    : 56
+TDG time : 524661
+OPT time : 85
+
+Level    : 56
+TDG time : 528484
+OPT time : 83
+
+Level    : 55
+TDG time : 186411
+OPT time : 87
+
+Level    : 55
+TDG time : 187372
+OPT time : 87
+
+Level    : 54
+TDG time : 168510
+OPT time : 84
+
+Level    : 54
+TDG time : 170849
+OPT time : 83
+
+Level    : 53
+TDG time : 177238
+OPT time : 87
+
+Level    : 53
+TDG time : 178145
+OPT time : 84
+
+Level    : 52
+TDG time : 201547
+OPT time : 112
+
+Level    : 52
+TDG time : 203346
+OPT time : 108
+
+Level    : 51
+TDG time : 217756
+OPT time : 83
+
+Level    : 51
+TDG time : 209820
+OPT time : 86
+
+Level    : 50
+TDG time : 163618
+OPT time : 91
+
+Level    : 50
+TDG time : 166124
+OPT time : 85
+
+Level    : 49
+TDG time : 180520
+OPT time : 90
+
+Level    : 49
+TDG time : 177763
+OPT time : 88
+
+Level    : 48
+TDG time : 153170
+OPT time : 107
+
+Level    : 48
+TDG time : 168910
+OPT time : 104
+
+Level    : 51
+TDG time : 206633
+OPT time : 85
+
+Level    : 51
+TDG time : 208804
+OPT time : 86
+
+Level    : 64
+TDG time : 4212
+OPT time : 87
+
+Level    : 63
+TDG time : 3985
+OPT time : 83
+
+Level    : 62
+TDG time : 4112
+OPT time : 111
+
+Level    : 61
+TDG time : 4461
+OPT time : 99
+
+Level    : 60
+TDG time : 5314
+OPT time : 83
+
+Level    : 59
+TDG time : 8929
+OPT time : 84
+
+Level    : 58
+TDG time : 27991
+OPT time : 84
+
+Level    : 57
+TDG time : 110361
+OPT time : 81
+
+Level    : 56
+TDG time : 553882
+OPT time : 80
+
+Level    : 55
+TDG time : 176192
+OPT time : 87
+
+Level    : 54
+TDG time : 159000
+OPT time : 91
+
+Level    : 55
+TDG time : 93650
+OPT time : 44
+
+Level    : 54
+TDG time : 87921
+OPT time : 51
+
+Level    : 53
+TDG time : 88250
+OPT time : 53
+
+Level    : 55
+TDG time : 95318
+OPT time : 45
+
+Level    : 54
+TDG time : 88917
+OPT time : 50
+
+Level    : 64
+TDG time : 2343
+OPT time : 48
+
+Level    : 63
+TDG time : 2130
+OPT time : 47
+
+Level    : 62
+TDG time : 2202
+OPT time : 54
+
+Level    : 61
+TDG time : 2437
+OPT time : 45
+
+Level    : 60
+TDG time : 3481
+OPT time : 50
+
+Level    : 59
+TDG time : 5115
+OPT time : 45
+
+Level    : 58
+TDG time : 13588
+OPT time : 49
+
+Level    : 57
+TDG time : 57323
+OPT time : 42
+
+Level    : 56
+TDG time : 291302
+OPT time : 43
+
+Level    : 64
+TDG time : 2396
+OPT time : 44
+
+Level    : 63
+TDG time : 2095
+OPT time : 46
+
+Level    : 62
+TDG time : 2164
+OPT time : 54
+
+Level    : 61
+TDG time : 2313
+OPT time : 44
+
+Level    : 60
+TDG time : 2776
+OPT time : 47
+
+Level    : 59
+TDG time : 4540
+OPT time : 48
+
+Level    : 58
+TDG time : 13260
+OPT time : 47
+
+Level    : 57
+TDG time : 57096
+OPT time : 44
+
+Level    : 56
+TDG time : 271677
+OPT time : 43
+
+Level    : 55
+TDG time : 179423
+OPT time : 83
+
+Level    : 55
+TDG time : 209207
+OPT time : 104
+
+Level    : 54
+TDG time : 208037
+OPT time : 91
+
+Level    : 53
+TDG time : 173888
+OPT time : 96
+
+Level    : 52
+TDG time : 207848
+OPT time : 113
+
+Level    : 51
+TDG time : 226570
+OPT time : 106
+
+Level    : 50
+TDG time : 183123
+OPT time : 83
+
+Level    : 49
+TDG time : 200406
+OPT time : 81
+
+Level    : 48
+TDG time : 178035
+OPT time : 80
+
+Level    : 47
+TDG time : 181429
+OPT time : 90
+
+Level    : 46
+TDG time : 150461
+OPT time : 91
+
+Level    : 45
+TDG time : 166167
+OPT time : 90
+
+Level    : 44
+TDG time : 143761
+OPT time : 95
+
+Level    : 43
+TDG time : 143341
+OPT time : 91
+
+Level    : 51
+TDG time : 347794
+OPT time : 87
+
+Level    : 50
+TDG time : 291625
+OPT time : 87
+
+Level    : 49
+TDG time : 374433
+OPT time : 91
+
+Level    : 48
+TDG time : 423056
+OPT time : 86
+
+Level    : 47
+TDG time : 458792
+OPT time : 87
+
+Level    : 47
+TDG time : 403683
+OPT time : 82
+
+Level    : 47
+TDG time : 451803
+OPT time : 86
+
+Level    : 46
+TDG time : 507104
+OPT time : 87
+
+Level    : 45
+TDG time : 602096
+OPT time : 92
+
+Level    : 44
+TDG time : 659810
+OPT time : 85
+
+Level    : 43
+TDG time : 712431
+OPT time : 81
+
+Level    : 43
+TDG time : 362663
+OPT time : 42
+
+Level    : 44
+TDG time : 335582
+OPT time : 43
+
+Level    : 43
+TDG time : 347092
+OPT time : 41
+
+Level    : 42
+TDG time : 1115986
+OPT time : 134
+
+Level    : 41
+TDG time : 468595
+OPT time : 51
+
+Level    : 48
+TDG time : 433223
+OPT time : 82
+
+Level    : 48
+TDG time : 427135
+OPT time : 80
+
+Level    : 47
+TDG time : 440267
+OPT time : 85
+
+Level    : 46
+TDG time : 884752
+OPT time : 84
+
+Level    : 45
+TDG time : 617778
+OPT time : 85
+
+Level    : 44
+TDG time : 672637
+OPT time : 82
+
+Level    : 43
+TDG time : 702248
+OPT time : 79
+
+Level    : 42
+TDG time : 852441
+OPT time : 88
+
+Level    : 42
+TDG time : 784823
+OPT time : 83
+
+Level    : 41
+TDG time : 849561
+OPT time : 87
+
+Level    : 40
+TDG time : 998865
+OPT time : 90
+
+Level    : 41
+TDG time : 1157714
+OPT time : 84
+
+Level    : 40
+TDG time : 1890437
+OPT time : 87
+
+Level    : 59
+TDG time : 8882
+OPT time : 92
+
+Level    : 59
+TDG time : 9041
+OPT time : 86
+
+Level    : 58
+TDG time : 24962
+OPT time : 88
+
+Level    : 57
+TDG time : 103190
+OPT time : 86
+
+Level    : 56
+TDG time : 557264
+OPT time : 90
+
+Level    : 59
+TDG time : 9117
+OPT time : 84
+
+Level    : 58
+TDG time : 25185
+OPT time : 85
+
+Level    : 57
+TDG time : 105249
+OPT time : 83
+
+Level    : 56
+TDG time : 566524
+OPT time : 90
+
+Level    : 56
+TDG time : 853300
+OPT time : 123
+
+Level    : 56
+TDG time : 865067
+OPT time : 124
+
+Level    : 56
+TDG time : 285430
+OPT time : 45
+
+Level    : 56
+TDG time : 789300
+OPT time : 133
+
+Level    : 56
+TDG time : 810612
+OPT time : 127
+
+Level    : 56
+TDG time : 101467
+OPT time : 19
+
+Level    : 56
+TDG time : 859136
+OPT time : 122
+
+Level    : 56
+TDG time : 874308
+OPT time : 145
+
+Level    : 56
+TDG time : 174610
+OPT time : 64
+
+Level    : 56
+TDG time : 211229
+OPT time : 75
+
+Level    : 56
+TDG time : 50560
+OPT time : 12
+
+Level    : 56
+TDG time : 49767
+OPT time : 12
+
+Level    : 56
+TDG time : 50569
+OPT time : 13
+
+Level    : 56
+TDG time : 50054
+OPT time : 12
+
+Level    : 56
+TDG time : 150686
+OPT time : 57
+
+Level    : 56
+TDG time : 224162
+OPT time : 60
+
+Level    : 56
+TDG time : 287265
+OPT time : 49
+
+Level    : 56
+TDG time : 271329
+OPT time : 47
+
+Level    : 56
+TDG time : 323412
+OPT time : 47
+
+Level    : 56
+TDG time : 73980
+OPT time : 15
+
+Level    : 56
+TDG time : 73127
+OPT time : 17
+
+Level    : 56
+TDG time : 273434
+OPT time : 39
+
+Level    : 55
+TDG time : 101869
+OPT time : 46
+
+Level    : 55
+TDG time : 194275
+OPT time : 83
+
+Level    : 55
+TDG time : 287187
+OPT time : 125
+
+Level    : 54
+TDG time : 267736
+OPT time : 104
+
+Level    : 53
+TDG time : 366954
+OPT time : 101
+
+Level    : 52
+TDG time : 584001
+OPT time : 93
+
+Level    : 51
+TDG time : 726908
+OPT time : 116
+
+Level    : 50
+TDG time : 876190
+OPT time : 102
+
+Level    : 51
+TDG time : 902038
+OPT time : 95
+
+Level    : 50
+TDG time : 1046260
+OPT time : 95
+
+Level    : 49
+TDG time : 1284002
+OPT time : 126
+
+Level    : 48
+TDG time : 1351509
+OPT time : 130
+
+Level    : 47
+TDG time : 711064
+OPT time : 136
+
+Level    : 39
+TDG time : 11435
+OPT time : 24
+
+Level    : 38
+TDG time : 20064
+OPT time : 17
+
+Level    : 37
+TDG time : 21079
+OPT time : 16
+
+Level    : 36
+TDG time : 18875
+OPT time : 20
+
+Level    : 35
+TDG time : 28263
+OPT time : 17
+
+Level    : 34
+TDG time : 30341
+OPT time : 18
+
+Level    : 33
+TDG time : 24934
+OPT time : 18
+
+Level    : 32
+TDG time : 39093
+OPT time : 24
+
+Level    : 31
+TDG time : 51382
+OPT time : 17
+
+Level    : 30
+TDG time : 40307
+OPT time : 18
+
+Level    : 29
+TDG time : 48668
+OPT time : 17
+
+Level    : 28
+TDG time : 41740
+OPT time : 17
+
+Level    : 27
+TDG time : 44915
+OPT time : 17
+
+Level    : 26
+TDG time : 52872
+OPT time : 15
+
+Level    : 25
+TDG time : 44850
+OPT time : 22
+
+Level    : 24
+TDG time : 43716
+OPT time : 17
+
+Level    : 23
+TDG time : 51294
+OPT time : 13
+
+Level    : 22
+TDG time : 39338
+OPT time : 14
+
+Level    : 21
+TDG time : 39959
+OPT time : 17
+
+Level    : 20
+TDG time : 39289
+OPT time : 16
+
+Level    : 47
+TDG time : 207526
+OPT time : 160
+
+Level    : 47
+TDG time : 203898
+OPT time : 112
+
+Level    : 47
+TDG time : 80859
+OPT time : 77
+
+Level    : 47
+TDG time : 61869
+OPT time : 47
+
+Level    : 47
+TDG time : 62389
+OPT time : 41
+
+Level    : 47
+TDG time : 62819
+OPT time : 34
+
+Level    : 47
+TDG time : 62867
+OPT time : 36
+
+Level    : 47
+TDG time : 83097
+OPT time : 33
+
+Level    : 47
+TDG time : 84107
+OPT time : 33
+
+Level    : 47
+TDG time : 84718
+OPT time : 36
+
+Level    : 47
+TDG time : 86626
+OPT time : 35
+
+Level    : 46
+TDG time : 234814
+OPT time : 39
+
+Level    : 45
+TDG time : 236990
+OPT time : 40
+
+Level    : 55
+TDG time : 96119
+OPT time : 38
+
+Level    : 54
+TDG time : 98941
+OPT time : 41
+
+Level    : 55
+TDG time : 97140
+OPT time : 36
+
+Level    : 54
+TDG time : 110802
+OPT time : 38
+
+Level    : 55
+TDG time : 282209
+OPT time : 94
+
+Level    : 54
+TDG time : 355346
+OPT time : 89
+
+Level    : 53
+TDG time : 387693
+OPT time : 90
+
+Level    : 52
+TDG time : 625641
+OPT time : 100
+
+Level    : 51
+TDG time : 754431
+OPT time : 84
+
+Level    : 50
+TDG time : 874951
+OPT time : 93
+
+Level    : 49
+TDG time : 933710
+OPT time : 91
+
+Level    : 48
+TDG time : 1050938
+OPT time : 151
+
+Level    : 47
+TDG time : 249704
+OPT time : 87
+
+Level    : 46
+TDG time : 611038
+OPT time : 93
+
+Level    : 45
+TDG time : 650662
+OPT time : 91
+
+Level    : 44
+TDG time : 934163
+OPT time : 92
+
+Level    : 43
+TDG time : 855066
+OPT time : 99
+
+Level    : 42
+TDG time : 929793
+OPT time : 121
+
+Level    : 41
+TDG time : 938407
+OPT time : 86
+
+Level    : 40
+TDG time : 1107974
+OPT time : 84
+
+Level    : 39
+TDG time : 1140828
+OPT time : 91
+
+Level    : 38
+TDG time : 1305790
+OPT time : 94
+
+Level    : 37
+TDG time : 1211996
+OPT time : 92
+
+Level    : 36
+TDG time : 1256594
+OPT time : 94
+
+Level    : 35
+TDG time : 1215012
+OPT time : 89
+
+Level    : 34
+TDG time : 1402666
+OPT time : 86
+
+Level    : 33
+TDG time : 1449449
+OPT time : 85
+
+Level    : 32
+TDG time : 1446453
+OPT time : 85
+
+Level    : 31
+TDG time : 1506219
+OPT time : 86
+
+Level    : 30
+TDG time : 1463945
+OPT time : 86
+
+Level    : 55
+TDG time : 258135
+OPT time : 146
+
+Level    : 55
+TDG time : 205380
+OPT time : 99
+
+Level    : 54
+TDG time : 286275
+OPT time : 137
+
+Level    : 53
+TDG time : 247831
+OPT time : 130
+
+Level    : 52
+TDG time : 370330
+OPT time : 107
+
+Level    : 51
+TDG time : 465768
+OPT time : 115
+
+Level    : 50
+TDG time : 517227
+OPT time : 110
+
+Level    : 49
+TDG time : 604628
+OPT time : 138
+
+Level    : 48
+TDG time : 664244
+OPT time : 113
+
+Level    : 47
+TDG time : 212800
+OPT time : 111
+
+Level    : 46
+TDG time : 385849
+OPT time : 111
+
+Level    : 45
+TDG time : 387492
+OPT time : 108
+
+Level    : 44
+TDG time : 481707
+OPT time : 117
+
+Level    : 43
+TDG time : 471465
+OPT time : 114
+
+Level    : 42
+TDG time : 448991
+OPT time : 107
+
+Level    : 41
+TDG time : 494508
+OPT time : 113
+
+Level    : 40
+TDG time : 647220
+OPT time : 113
+
+Level    : 39
+TDG time : 477640
+OPT time : 198
+
+Level    : 64
+TDG time : 2465
+OPT time : 41
+
+Level    : 64
+TDG time : 1967
+OPT time : 40
+
+Level    : 63
+TDG time : 1982
+OPT time : 51
+
+Level    : 63
+TDG time : 1980
+OPT time : 48
+
+Level    : 62
+TDG time : 2087
+OPT time : 45
+
+Level    : 62
+TDG time : 2058
+OPT time : 47
+
+Level    : 61
+TDG time : 2332
+OPT time : 53
+
+Level    : 61
+TDG time : 2250
+OPT time : 45
+
+Level    : 60
+TDG time : 2653
+OPT time : 42
+
+Level    : 60
+TDG time : 2688
+OPT time : 40
+
+Level    : 64
+TDG time : 6084
+OPT time : 105
+
+Level    : 63
+TDG time : 5781
+OPT time : 132
+
+Level    : 62
+TDG time : 6135
+OPT time : 116
+
+Level    : 61
+TDG time : 7557
+OPT time : 126
+
+Level    : 60
+TDG time : 8631
+OPT time : 126
+
+Level    : 59
+TDG time : 14337
+OPT time : 109
+
+Level    : 58
+TDG time : 38541
+OPT time : 103
+
+Level    : 57
+TDG time : 155197
+OPT time : 106
+
+Level    : 56
+TDG time : 766346
+OPT time : 104
+
+Level    : 63
+TDG time : 6194
+OPT time : 105
+
+Level    : 62
+TDG time : 6058
+OPT time : 105
+
+Level    : 61
+TDG time : 6575
+OPT time : 103
+
+Level    : 60
+TDG time : 7921
+OPT time : 97
+
+Level    : 59
+TDG time : 12703
+OPT time : 106
+
+Level    : 58
+TDG time : 36615
+OPT time : 103
+
+Level    : 57
+TDG time : 152008
+OPT time : 101
+
+Level    : 63
+TDG time : 6183
+OPT time : 137
+
+Level    : 62
+TDG time : 5884
+OPT time : 96
+
+Level    : 61
+TDG time : 6236
+OPT time : 98
+
+Level    : 60
+TDG time : 7489
+OPT time : 100
+
+Level    : 59
+TDG time : 12145
+OPT time : 102
+
+Level    : 58
+TDG time : 34275
+OPT time : 99
+
+Level    : 57
+TDG time : 161482
+OPT time : 142
+
+Level    : 56
+TDG time : 931972
+OPT time : 95
+
+Level    : 55
+TDG time : 1508354
+OPT time : 48
+
+Level    : 55
+TDG time : 1575215
+OPT time : 36
+
+Level    : 54
+TDG time : 140383
+OPT time : 46
+
+Level    : 54
+TDG time : 125846
+OPT time : 41
+
+Level    : 54
+TDG time : 127635
+OPT time : 38
+
+Level    : 54
+TDG time : 248174
+OPT time : 85
+
+Level    : 54
+TDG time : 128238
+OPT time : 37
+
+Level    : 54
+TDG time : 245819
+OPT time : 76
+
+Level    : 54
+TDG time : 128956
+OPT time : 35
+
+Level    : 63
+TDG time : 2270
+OPT time : 35
+
+Level    : 62
+TDG time : 2087
+OPT time : 41
+
+Level    : 61
+TDG time : 2205
+OPT time : 39
+
+Level    : 60
+TDG time : 2659
+OPT time : 35
+
+Level    : 59
+TDG time : 4358
+OPT time : 40
+
+Level    : 58
+TDG time : 13767
+OPT time : 40
+
+Level    : 57
+TDG time : 53464
+OPT time : 48
+
+Level    : 56
+TDG time : 271388
+OPT time : 44
+
+Level    : 55
+TDG time : 1590920
+OPT time : 40
+
+Level    : 54
+TDG time : 71522
+OPT time : 20
+
+Level    : 54
+TDG time : 66324
+OPT time : 21
+
+Level    : 53
+TDG time : 319167
+OPT time : 81
+
+Level    : 52
+TDG time : 305395
+OPT time : 81
+
+Level    : 51
+TDG time : 380131
+OPT time : 77
+
+Level    : 64
+TDG time : 2310
+OPT time : 34
+
+Level    : 63
+TDG time : 1995
+OPT time : 36
+
+Level    : 62
+TDG time : 2073
+OPT time : 39
+
+Level    : 61
+TDG time : 2187
+OPT time : 48
+
+Level    : 60
+TDG time : 2716
+OPT time : 46
+
+Level    : 64
+TDG time : 9862
+OPT time : 166
+
+Level    : 63
+TDG time : 9590
+OPT time : 165
+
+Level    : 62
+TDG time : 9995
+OPT time : 163
+
+Level    : 61
+TDG time : 10538
+OPT time : 212
+
+Level    : 60
+TDG time : 13222
+OPT time : 207
+
+Level    : 59
+TDG time : 12815
+OPT time : 106
+
+Level    : 58
+TDG time : 37251
+OPT time : 100
+
+Level    : 57
+TDG time : 161412
+OPT time : 108
+
+Level    : 56
+TDG time : 872398
+OPT time : 134
+
+Level    : 54
+TDG time : 18980
+OPT time : 7
+
+Level    : 55
+TDG time : 226166
+OPT time : 7
+
+Level    : 54
+TDG time : 126987
+OPT time : 38
+
+Level    : 53
+TDG time : 154585
+OPT time : 41
+
+Level    : 52
+TDG time : 151792
+OPT time : 39
+
+Level    : 51
+TDG time : 244362
+OPT time : 49
+
+Level    : 50
+TDG time : 6027
+OPT time : 4257
+
+Level    : 49
+TDG time : 10495
+OPT time : 12
+
+Level    : 48
+TDG time : 9835
+OPT time : 13
+
+Level    : 47
+TDG time : 3767
+OPT time : 15
+
+Level    : 46
+TDG time : 5706
+OPT time : 13
+
+Level    : 45
+TDG time : 5786
+OPT time : 16
+
+Level    : 44
+TDG time : 8890
+OPT time : 9
+
+Level    : 43
+TDG time : 10464
+OPT time : 14
+
+Level    : 42
+TDG time : 11858
+OPT time : 10
+
+Level    : 41
+TDG time : 13945
+OPT time : 12
+
+Level    : 40
+TDG time : 13588
+OPT time : 13
+
+Level    : 39
+TDG time : 15474
+OPT time : 10
+
+Level    : 38
+TDG time : 15629
+OPT time : 10
+
+Level    : 37
+TDG time : 16618
+OPT time : 12
+
+Level    : 36
+TDG time : 16999
+OPT time : 12
+
+Level    : 35
+TDG time : 16020
+OPT time : 11
+
+Level    : 34
+TDG time : 19815
+OPT time : 13
+
+Level    : 33
+TDG time : 16929
+OPT time : 10
+
+Level    : 54
+TDG time : 253317
+OPT time : 74
+
+Level    : 54
+TDG time : 251337
+OPT time : 76
+
+Level    : 53
+TDG time : 317556
+OPT time : 76
+
+Level    : 52
+TDG time : 291109
+OPT time : 74
+
+Level    : 51
+TDG time : 376994
+OPT time : 96
+
+Level    : 50
+TDG time : 463772
+OPT time : 73
+
+Level    : 49
+TDG time : 448157
+OPT time : 79
+
+Level    : 48
+TDG time : 507117
+OPT time : 71
+
+Level    : 47
+TDG time : 155075
+OPT time : 76
+
+Level    : 46
+TDG time : 238095
+OPT time : 74
+
+Level    : 45
+TDG time : 269796
+OPT time : 74
+
+Level    : 54
+TDG time : 24859
+OPT time : 19
+
+Level    : 54
+TDG time : 24607
+OPT time : 19
+
+Level    : 53
+TDG time : 28096
+OPT time : 22
+
+Level    : 52
+TDG time : 28314
+OPT time : 25
+
+Level    : 51
+TDG time : 34358
+OPT time : 23
+
+Level    : 50
+TDG time : 36966
+OPT time : 38
+
+Level    : 49
+TDG time : 46465
+OPT time : 27
+
+Level    : 48
+TDG time : 44191
+OPT time : 31
+
+Level    : 47
+TDG time : 16977
+OPT time : 32
+
+Level    : 46
+TDG time : 23261
+OPT time : 22
+
+Level    : 45
+TDG time : 26853
+OPT time : 22
+
+Level    : 54
+TDG time : 91389
+OPT time : 67
+
+Level    : 53
+TDG time : 104227
+OPT time : 110
+
+Level    : 52
+TDG time : 107310
+OPT time : 67
+
+Level    : 54
+TDG time : 46791
+OPT time : 38
+
+Level    : 53
+TDG time : 54190
+OPT time : 37
+
+Level    : 52
+TDG time : 52045
+OPT time : 40
+
+Level    : 51
+TDG time : 74548
+OPT time : 38
+
+Level    : 54
+TDG time : 49297
+OPT time : 44
+
+Level    : 53
+TDG time : 55968
+OPT time : 39
+
+Level    : 52
+TDG time : 51433
+OPT time : 40
+
+Level    : 51
+TDG time : 62042
+OPT time : 42
+
+Level    : 50
+TDG time : 175881
+OPT time : 69
+
+Level    : 49
+TDG time : 139193
+OPT time : 70
+
+Level    : 50
+TDG time : 133948
+OPT time : 70
+
+Level    : 49
+TDG time : 165568
+OPT time : 73
+
+Level    : 48
+TDG time : 228712
+OPT time : 69
+
+Level    : 47
+TDG time : 88204
+OPT time : 70
+
+Level    : 46
+TDG time : 160431
+OPT time : 76
+
+Level    : 45
+TDG time : 180322
+OPT time : 68
+
+Level    : 47
+TDG time : 82456
+OPT time : 69
+
+Level    : 46
+TDG time : 101961
+OPT time : 79
+
+Level    : 45
+TDG time : 108373
+OPT time : 70
+
+Level    : 44
+TDG time : 122786
+OPT time : 73
+
+Level    : 47
+TDG time : 91824
+OPT time : 66
+
+Level    : 46
+TDG time : 119598
+OPT time : 70
+
+Level    : 46
+TDG time : 29673
+OPT time : 27
+
+Level    : 46
+TDG time : 104977
+OPT time : 74
+
+Level    : 45
+TDG time : 200513
+OPT time : 70
+
+Level    : 44
+TDG time : 221882
+OPT time : 74
+
+Level    : 44
+TDG time : 153711
+OPT time : 73
+
+Level    : 43
+TDG time : 176324
+OPT time : 79
+
+Level    : 42
+TDG time : 155102
+OPT time : 78
+
+Level    : 41
+TDG time : 163090
+OPT time : 81
+
+Level    : 45
+TDG time : 197847
+OPT time : 74
+
+Level    : 45
+TDG time : 103344
+OPT time : 41
+
+Level    : 40
+TDG time : 224627
+OPT time : 75
+
+Level    : 39
+TDG time : 244675
+OPT time : 74
+
+Level    : 38
+TDG time : 282237
+OPT time : 91
+
+Level    : 37
+TDG time : 301087
+OPT time : 83
+
+Level    : 36
+TDG time : 315862
+OPT time : 94
+
+Level    : 35
+TDG time : 306068
+OPT time : 74
+
+Level    : 34
+TDG time : 368590
+OPT time : 77
+
+Level    : 33
+TDG time : 358525
+OPT time : 74
+
+Level    : 32
+TDG time : 409241
+OPT time : 135
+
+Level    : 31
+TDG time : 421428
+OPT time : 74
+
+Level    : 30
+TDG time : 434050
+OPT time : 78
+
+Level    : 29
+TDG time : 408121
+OPT time : 93
+
+Level    : 28
+TDG time : 446944
+OPT time : 70
+
+Level    : 27
+TDG time : 463497
+OPT time : 74
+
+Level    : 26
+TDG time : 469397
+OPT time : 72
+
+Level    : 25
+TDG time : 461349
+OPT time : 74
+
+Level    : 24
+TDG time : 488315
+OPT time : 74
+
+Level    : 23
+TDG time : 484750
+OPT time : 73
+
+Level    : 22
+TDG time : 478425
+OPT time : 95
+
+Level    : 21
+TDG time : 441974
+OPT time : 72
+
+Level    : 20
+TDG time : 449492
+OPT time : 73
+
+Level    : 19
+TDG time : 447844
+OPT time : 73
+
+Level    : 18
+TDG time : 428299
+OPT time : 72
+
+Level    : 17
+TDG time : 380923
+OPT time : 71
+
+Level    : 16
+TDG time : 3590715
+OPT time : 73
+
+Level    : 15
+TDG time : 3310390
+OPT time : 75
+
+Level    : 14
+TDG time : 298840
+OPT time : 73
+
+Level    : 13
+TDG time : 2616483
+OPT time : 78
+
+Level    : 12
+TDG time : 1378405
+OPT time : 77
+
+Level    : 11
+TDG time : 1072204
+OPT time : 75
+
+Level    : 10
+TDG time : 849140
+OPT time : 75
+
+Level    : 9
+TDG time : 639062
+OPT time : 73
+
+Level    : 8
+TDG time : 522613
+OPT time : 72
+
+Level    : 7
+TDG time : 322478
+OPT time : 95
+
+Level    : 6
+TDG time : 227352
+OPT time : 87
+
+Level    : 60
+TDG time : 39559
+OPT time : 1199
+
+Level    : 59
+TDG time : 120722
+OPT time : 1111
+
+Level    : 58
+TDG time : 419955
+OPT time : 1271
+
+Level    : 58
+TDG time : 401957
+OPT time : 1158
+
+Level    : 57
+TDG time : 657765
+OPT time : 1167
+
+Level    : 56
+TDG time : 2463802
+OPT time : 1148
+
+Level    : 55
+TDG time : 2369929
+OPT time : 297
+
+Level    : 54
+TDG time : 327577
+OPT time : 1183
+
+Level    : 54
+TDG time : 39805
+OPT time : 130
+
+Level    : 54
+TDG time : 36698
+OPT time : 124
+
+Level    : 54
+TDG time : 304608
+OPT time : 1146
+
+Level    : 53
+TDG time : 364695
+OPT time : 1140
+
+Level    : 54
+TDG time : 337643
+OPT time : 1167
+
+Level    : 53
+TDG time : 382395
+OPT time : 1247
+
+Level    : 63
+TDG time : 7834
+OPT time : 1195
+
+Level    : 62
+TDG time : 12396
+OPT time : 1195
+
+Level    : 63
+TDG time : 11419
+OPT time : 2156
+
+Level    : 62
+TDG time : 18024
+OPT time : 2145
+
+Level    : 61
+TDG time : 29953
+OPT time : 2791
+
+Level    : 60
+TDG time : 63641
+OPT time : 2830
+
+Level    : 59
+TDG time : 179928
+OPT time : 2096
+
+Level    : 58
+TDG time : 330036
+OPT time : 2063
+
+Level    : 63
+TDG time : 10983
+OPT time : 2071
+
+Level    : 62
+TDG time : 21669
+OPT time : 2387
+
+Level    : 61
+TDG time : 31506
+OPT time : 2203
+
+Level    : 60
+TDG time : 69545
+OPT time : 2638
+
+Level    : 59
+TDG time : 181556
+OPT time : 2053
+
+Level    : 58
+TDG time : 364948
+OPT time : 2056
+
+Level    : 63
+TDG time : 6168
+OPT time : 136
+
+Level    : 62
+TDG time : 6958
+OPT time : 142
+
+Level    : 61
+TDG time : 8796
+OPT time : 138
+
+Level    : 63
+TDG time : 5768
+OPT time : 133
+
+Level    : 63
+TDG time : 5625
+OPT time : 135
+
+Level    : 63
+TDG time : 156701
+OPT time : 156
+
+Level    : 63
+TDG time : 5757
+OPT time : 126
+
+Level    : 63
+TDG time : 5898
+OPT time : 164
+
+Level    : 63
+TDG time : 6064
+OPT time : 162
+
+Level    : 63
+TDG time : 5536
+OPT time : 153
+
+Level    : 63
+TDG time : 6073
+OPT time : 159
+
+Level    : 63
+TDG time : 5018
+OPT time : 105
+
+Level    : 62
+TDG time : 5291
+OPT time : 111
+
+Level    : 61
+TDG time : 5565
+OPT time : 102
+
+Level    : 60
+TDG time : 6090
+OPT time : 106
+
+Level    : 59
+TDG time : 7504
+OPT time : 132
+
+Level    : 58
+TDG time : 12077
+OPT time : 102
+
+Level    : 57
+TDG time : 15597
+OPT time : 106
+
+Level    : 56
+TDG time : 39234
+OPT time : 99
+
+Level    : 55
+TDG time : 131361
+OPT time : 104
+
+Level    : 54
+TDG time : 258090
+OPT time : 108
+
+Level    : 53
+TDG time : 723195
+OPT time : 117
+
+Level    : 52
+TDG time : 2238272
+OPT time : 112
+
+Level    : 51
+TDG time : 355898
+OPT time : 105
+
+Level    : 50
+TDG time : 485366
+OPT time : 119
+
+Level    : 49
+TDG time : 712643
+OPT time : 105
+
+Level    : 51
+TDG time : 357895
+OPT time : 106
+
+Level    : 50
+TDG time : 448343
+OPT time : 101
+
+Level    : 49
+TDG time : 589223
+OPT time : 120
+
+Level    : 48
+TDG time : 723036
+OPT time : 106
+
+Level    : 47
+TDG time : 884094
+OPT time : 105
+

@@ -1,0 +1,295 @@
+Time Cost: 42533
+Trial    : 10000
+
+Time Cost: 188290
+Trial    : 40000
+
+
+Time Cost: 5975
+Trial    : 400
+
+file      : vn64\opt.txt
+Time Cost : 253425
+Learned   : 200
+
+file      : vn64\opt.txt
+Time Cost : 9374
+Learned   : 200
+
+file      : vn64\opt.txt
+Time Cost : 527
+Learned   : 200
+
+file      : vn64\opt.txt
+Time Cost : 514
+Learned   : 200
+
+file      : vn64\opt.txt
+Time Cost : 85975
+Learned   : 20
+
+file      : vn64\opt.txt
+Time Cost : 5932
+Learned   : 1000
+
+file      : vn64\opt.txt
+Time Cost : 6295
+Learned   : 1000
+
+file      : vn64\opt.txt
+Time Cost : 6321
+Learned   : 1000
+
+file      : vn64\opt.txt
+Time Cost : 164652
+Learned   : 50
+
+file      : vn64\opt.txt
+Time Cost : 59451
+Learned   : 10000
+
+file      : vn64\opt.txt
+Time Cost : 49099
+Learned   : 20000
+
+file      : vn64\opt.txt
+Time Cost : 46000
+Learned   : 100000
+
+file      : vn64\opt.txt
+Time Cost : 45683
+Learned   : 100000
+
+file      : vn64\opt.txt
+Time Cost : 48200
+Learned   : 100000
+
+file      : vn64\opt.txt
+Time Cost : 255206
+Learned   : 100000
+
+Time Cost: 1899
+Trial    : 100
+
+Time Cost: 404
+Trial    : 10
+
+Time Cost: 426
+Trial    : 10
+
+Time Cost: 397
+Trial    : 10
+
+Time Cost: 11880
+Trial    : 10000
+
+Time Cost: 7135
+Trial    : 1000
+
+file      : vn64\opt.txt
+Time Cost : 3654
+Learned   : 500
+
+file      : vn64\opt.txt
+Time Cost : 250300
+Learned   : 100000
+
+file      : vn64_2\opt.txt
+Time Cost : 22201
+Learned   : 100000
+
+Time Cost: 46
+Trial    : 1000
+
+Time Cost: 5
+Trial    : 100
+
+Time Cost: 160
+Trial    : 10000
+
+Time Cost: 418
+Trial    : 10000
+
+Time Cost: 5
+Trial    : 100
+
+file      : mathtest\opt.txt
+Time Cost : 686
+Learned   : 1000
+
+Time Cost: 4
+Trial    : 100
+
+Time Cost: 6
+Trial    : 100
+
+Time Cost: 7
+Trial    : 100
+
+Time Cost: 136
+Trial    : 10000
+
+file      : mathtest2\opt.txt
+Time Cost : 137
+Learned   : 100
+
+file      : mathtest2\opt.txt
+Time Cost : 2528
+Learned   : 9000
+
+file      : mathtest2\opt.txt
+Time Cost : 3575
+Learned   : 9000
+
+file      : mathtest2\opt.txt
+Time Cost : 3688
+Learned   : 9000
+
+file      : mathtest2\opt.txt
+Time Cost : 739
+Learned   : 1000
+
+file      : mathtest2\opt.txt
+Time Cost : 721
+Learned   : 1000
+
+file      : mathtest2\opt.txt
+Time Cost : 4032
+Learned   : 9000
+
+file      : mathtest2\opt.txt
+Time Cost : 32644
+Learned   : 9000
+
+file      : mathtest2\opt.txt
+Time Cost : 4163
+Learned   : 9000
+
+Time Cost: 82
+Trial    : 10
+
+Time Cost: 104
+Trial    : 5
+
+Time Cost: 70
+Trial    : 5
+
+Time Cost: 83
+Trial    : 5
+
+Time Cost: 297452
+Trial    : 50000
+
+file      : sp64\opt.txt
+Time Cost : 30060
+Learned   : 50
+
+file      : sp64\opt.txt
+Time Cost : 4761
+Learned   : 10
+
+file      : sp64\opt.txt
+Time Cost : 4544
+Learned   : 15
+
+file      : sp64\opt.txt
+Time Cost : 6114
+Learned   : 20
+
+file      : sp64\opt.txt
+Time Cost : 4223
+Learned   : 15
+
+file      : sp64\opt.txt
+Time Cost : 4284
+Learned   : 15
+
+file      : sp64\opt.txt
+Time Cost : 5314
+Learned   : 15
+
+file      : sp64\opt.txt
+Time Cost : 5059
+Learned   : 10
+
+file      : sp64\opt.txt
+Time Cost : 4942
+Learned   : 100
+
+file      : sp64\opt.txt
+Time Cost : 6650
+Learned   : 100
+
+file      : sp64\opt.txt
+Time Cost : 6457
+Learned   : 100
+
+file      : sp64\opt.txt
+Time Cost : 25213
+Learned   : 100
+
+file      : sp64\opt.txt
+Time Cost : 14474
+Learned   : 100
+
+file      : sp64\opt.txt
+Time Cost : 7157
+Learned   : 100
+
+file      : sp64\opt.txt
+Time Cost : 522858
+Learned   : 100000
+
+file      : sp64\opt.txt
+Time Cost : 815910
+Learned   : 100000
+
+file      : sp64\opt.txt
+Time Cost : 1071847
+Learned   : 100000
+
+file      : sp64\opt.txt
+Time Cost : 979681
+Learned   : 100000
+
+file      : sp64_2\opt.txt
+Time Cost : 650917
+Learned   : 100000
+
+file      : sp64_2\opt.txt
+Time Cost : 823224
+Learned   : 100000
+
+file      : sp64_2\opt.txt
+Time Cost : 713338
+Learned   : 100000
+
+file      : sp64_2\opt.txt
+Time Cost : 759909
+Learned   : 100000
+
+file      : sp64_2\opt.txt
+Time Cost : 711245
+Learned   : 100000
+
+Time Cost: 152
+Trial    : 100
+
+Time Cost: 21843
+Trial    : 10000
+
+Time Cost: 22175
+Trial    : 10000
+
+Time Cost: 602
+Trial    : 100
+
+Time Cost: 825
+Trial    : 100
+
+Time Cost: 1690
+Trial    : 100
+
+Time Cost: 295
+Trial    : 20
+
