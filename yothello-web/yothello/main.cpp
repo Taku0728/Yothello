@@ -33,90 +33,30 @@ int main(int argc, char **argv)
 	vector< vector<int> > matrix_w(hex_to_matrix(white));
 	vector< vector<int> > square_init(matrix_to_square(matrix_b, matrix_w));
 	turn = argv[1][32] - '0';
-	person = argv[1][33] - '0';
-	movei = argv[1][34] - '0';
-	movej = argv[1][35] - '0';
 
-	Board b;
-	ostringstream ossb;
-	ostringstream ossw;
-	if (person == 0) {
-		for (int i(0); i < 8; ++i) {
-			for (int j(0); j < 8; ++j) {
-				b.square[i][j] = square_init[i][j];
-			}
-		}
-		if (movei != 8) {
-			b.turn = turn + 1;
-			b.turnnot = !turn + 1;
-			b.move_board(movei, movej);
-			vector< vector<int> > s(8, vector<int>(8, 0));
-			for (int i(0); i < 8; ++i) {
-				for (int j(0); j < 8; ++j) {
-					s[i][j] = b.square[i][j];
-				}
-			}
-			ossb = matrix_to_hex(square_to_black(s));
-			ossw = matrix_to_hex(square_to_white(s));
-		}
-		else {
-			ossb << black;
-			ossw << white;
-		}
+	// ostringstream ossb;
+	// ostringstream ossw;
+	string local = argv[0];
+	while (local.back() != '/') {
+		local.pop_back();
 	}
-	else {
-		string local = argv[0];
-		while (local.back() != '/') {
-			local.pop_back();
-		}
-		Play p1;
-		p1.local_folder = local;
-		p1.load();
-		p1.read(p1.neu_folder);
-		double ew = 20.0;
-		p1.elim_width = ew;
-		for (int i(0); i < 8; ++i) {
-			for (int j(0); j < 8; ++j) {
-				p1.b.square[i][j] = square_init[i][j];
-			}
-		}
-		if (turn == 1) {
-			p1.player = 2;
-			p1.opponent = 1;
-		}
-		for (int i(0); i < 8; ++i) {
-			for (int j(0); j < 8; ++j) {
-				b.square[i][j] = square_init[i][j];
-			}
-		}
-		b.turn = turn + 1;
-		b.turnnot = !turn + 1;
-		p1.b = b;
-		p1.runabwithbook();
-		vector< vector<int> > s(8, vector<int>(8, 0));
-		b = p1.b;
-		for (int i(0); i < 8; ++i) {
-			for (int j(0); j < 8; ++j) {
-				s[i][j] = b.square[i][j];
-			}
-		}
-		ossb = matrix_to_hex(square_to_black(s));
-		ossw = matrix_to_hex(square_to_white(s));
-	}
-	b.turn = turn ? 1 : 2;
-	b.turnnot = turn ? 2 : 1;
-	b.calculate_moves();
-	vector< vector<int> > moves(8, vector<int>(8, 0));
-	int has_move(0);
+	Play p1;
+	p1.local_folder = local;
+	p1.load();
+	p1.read(p1.neu_folder);
+	double ew = 20.0;
+	p1.elim_width = ew;
 	for (int i(0); i < 8; ++i) {
 		for (int j(0); j < 8; ++j) {
-			moves[i][j] = b.moves[i][j];
-			if (moves[i][j]) {
-				has_move = 1;
-			}
+			p1.b.square[i][j] = square_init[i][j];
 		}
 	}
-	cout << ossb.str() << ossw.str() << (turn ? 0 : 1) << matrix_to_hex(moves).str() << has_move << endl;
+	if (turn == 2) {
+		p1.player = 2;
+		p1.opponent = 1;
+	}
+	int out = p1.get_move();
+	cout << out << endl;
 }
 
 void outputb(Play &p1, int mode, bool cal)

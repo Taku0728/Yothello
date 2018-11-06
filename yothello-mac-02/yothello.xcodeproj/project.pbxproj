@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F11CEA7C20E2070E00B5D2DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F11CEA7B20E2070E00B5D2DB /* main.cpp */; };
+		F11CEA8420E2079F00B5D2DB /* math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F11CEA8220E2079F00B5D2DB /* math.cpp */; };
+		F11CEA8720E2083700B5D2DB /* neuralnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F11CEA8520E2083700B5D2DB /* neuralnet.cpp */; };
+		F11CEA8A20E20E6200B5D2DB /* othello.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F11CEA8820E20E6200B5D2DB /* othello.cpp */; };
+		F11CEA8D20E20E7D00B5D2DB /* book.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F11CEA8B20E20E7D00B5D2DB /* book.cpp */; };
+		F11CEA9020E217D100B5D2DB /* tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F11CEA8E20E217D100B5D2DB /* tree.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F11CEA7620E2070E00B5D2DB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F11CEA7820E2070E00B5D2DB /* yothello */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = yothello; sourceTree = BUILT_PRODUCTS_DIR; };
+		F11CEA7B20E2070E00B5D2DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; usesTabs = 1; };
+		F11CEA8220E2079F00B5D2DB /* math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = math.cpp; sourceTree = "<group>"; };
+		F11CEA8320E2079F00B5D2DB /* math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = math.hpp; sourceTree = "<group>"; };
+		F11CEA8520E2083700B5D2DB /* neuralnet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = neuralnet.cpp; sourceTree = "<group>"; };
+		F11CEA8620E2083700B5D2DB /* neuralnet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = neuralnet.hpp; sourceTree = "<group>"; };
+		F11CEA8820E20E6200B5D2DB /* othello.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = othello.cpp; sourceTree = "<group>"; };
+		F11CEA8920E20E6200B5D2DB /* othello.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = othello.hpp; sourceTree = "<group>"; };
+		F11CEA8B20E20E7D00B5D2DB /* book.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = book.cpp; sourceTree = "<group>"; };
+		F11CEA8C20E20E7D00B5D2DB /* book.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = book.hpp; sourceTree = "<group>"; };
+		F11CEA8E20E217D100B5D2DB /* tree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tree.cpp; sourceTree = "<group>"; };
+		F11CEA8F20E217D100B5D2DB /* tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tree.hpp; sourceTree = "<group>"; };
+		F11CEB9E20E23C1B00B5D2DB /* vn */ = {isa = PBXFileReference; lastKnownFileType = folder; path = vn; sourceTree = "<group>"; };
+		F11CEB9F20E23C1B00B5D2DB /* settings.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = settings.txt; sourceTree = "<group>"; };
+		F11CEBA020E23C1B00B5D2DB /* PLAY */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PLAY; sourceTree = "<group>"; };
+		F11CEBA120E23C1C00B5D2DB /* record.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = record.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F11CEA7520E2070E00B5D2DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F11CEA6F20E2070E00B5D2DB = {
+			isa = PBXGroup;
+			children = (
+				F11CEA7A20E2070E00B5D2DB /* yothello */,
+				F11CEA7920E2070E00B5D2DB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F11CEA7920E2070E00B5D2DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F11CEA7820E2070E00B5D2DB /* yothello */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F11CEA7A20E2070E00B5D2DB /* yothello */ = {
+			isa = PBXGroup;
+			children = (
+				F11CEBA020E23C1B00B5D2DB /* PLAY */,
+				F11CEBA120E23C1C00B5D2DB /* record.txt */,
+				F11CEB9F20E23C1B00B5D2DB /* settings.txt */,
+				F11CEB9E20E23C1B00B5D2DB /* vn */,
+				F11CEA7B20E2070E00B5D2DB /* main.cpp */,
+				F11CEA8220E2079F00B5D2DB /* math.cpp */,
+				F11CEA8320E2079F00B5D2DB /* math.hpp */,
+				F11CEA8520E2083700B5D2DB /* neuralnet.cpp */,
+				F11CEA8620E2083700B5D2DB /* neuralnet.hpp */,
+				F11CEA8820E20E6200B5D2DB /* othello.cpp */,
+				F11CEA8920E20E6200B5D2DB /* othello.hpp */,
+				F11CEA8B20E20E7D00B5D2DB /* book.cpp */,
+				F11CEA8C20E20E7D00B5D2DB /* book.hpp */,
+				F11CEA8E20E217D100B5D2DB /* tree.cpp */,
+				F11CEA8F20E217D100B5D2DB /* tree.hpp */,
+			);
+			path = yothello;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F11CEA7720E2070E00B5D2DB /* yothello */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F11CEA7F20E2070E00B5D2DB /* Build configuration list for PBXNativeTarget "yothello" */;
+			buildPhases = (
+				F11CEA7420E2070E00B5D2DB /* Sources */,
+				F11CEA7520E2070E00B5D2DB /* Frameworks */,
+				F11CEA7620E2070E00B5D2DB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = yothello;
+			productName = yothello;
+			productReference = F11CEA7820E2070E00B5D2DB /* yothello */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F11CEA7020E2070E00B5D2DB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "吉田拓真";
+				TargetAttributes = {
+					F11CEA7720E2070E00B5D2DB = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = F11CEA7320E2070E00B5D2DB /* Build configuration list for PBXProject "yothello" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F11CEA6F20E2070E00B5D2DB;
+			productRefGroup = F11CEA7920E2070E00B5D2DB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F11CEA7720E2070E00B5D2DB /* yothello */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F11CEA7420E2070E00B5D2DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F11CEA7C20E2070E00B5D2DB /* main.cpp in Sources */,
+				F11CEA8420E2079F00B5D2DB /* math.cpp in Sources */,
+				F11CEA8720E2083700B5D2DB /* neuralnet.cpp in Sources */,
+				F11CEA8D20E20E7D00B5D2DB /* book.cpp in Sources */,
+				F11CEA8A20E20E6200B5D2DB /* othello.cpp in Sources */,
+				F11CEA9020E217D100B5D2DB /* tree.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F11CEA7D20E2070E00B5D2DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F11CEA7E20E2070E00B5D2DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F11CEA8020E2070E00B5D2DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F11CEA8120E2070E00B5D2DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F11CEA7320E2070E00B5D2DB /* Build configuration list for PBXProject "yothello" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F11CEA7D20E2070E00B5D2DB /* Debug */,
+				F11CEA7E20E2070E00B5D2DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F11CEA7F20E2070E00B5D2DB /* Build configuration list for PBXNativeTarget "yothello" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F11CEA8020E2070E00B5D2DB /* Debug */,
+				F11CEA8120E2070E00B5D2DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F11CEA7020E2070E00B5D2DB /* Project object */;
+}
