@@ -96,6 +96,8 @@ public:
 	void record();
 	void load();
 	
+	int get_move();
+
 	string local_folder;
 	string neu_folder;
 	string policy_folder;

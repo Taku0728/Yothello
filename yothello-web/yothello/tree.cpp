@@ -606,6 +606,165 @@ void Play::runabwithbook()
 	return;
 }
 
+int Play::get_move()
+{
+	clock_t start_time = clock();
+	
+	b.calculate_disks();
+	level = b.disks1 + b.disks2;
+	b.calculate_moves();
+	move_choices = b.move_num;
+	
+	Book book;
+	book.initialize(level, 12);
+	book.neu_folder = neu_folder;
+	book.load();
+	
+	bool(*p_moves)[8](b.moves);
+	if (player == 2) {
+		b.reverse();
+	}
+	for (int i(0); i < 65; ++i) {
+		depth[i] = dep;
+	}
+	for (int i(42); i < 65; ++i) {
+		depth[i] = dep + 2;
+	}
+	for (int i(5); i < 9; ++i) {
+		depth[i] = dep + 2;
+	}
+	for (int i(perf); i < 65; ++i) {
+		depth[i] = 99;
+	}
+	
+	
+	elim_width = 20;
+	if (level > 44) {
+		elim_width = 99;
+	}
+	if (level == 44) {
+		elim_width = 28;
+	}
+	if (level == 43) {
+		elim_width = 22;
+	}
+	//�J�n�̈��
+	if (level == 4) start = true;
+	if (start && player == 1) {
+		int dc[2];
+		Random_choose rdc;
+		rdc(dc, b.moves, b.move_num);
+		choseni = dc[0];
+		chosenj = dc[1];
+	}
+	
+	//�Q�[���I��
+	else if (level == 64) {
+		endgame = true;
+		choseni = 0;
+		chosenj = -1;
+	}
+	
+	//PASS�̏ꍇ
+	else if (move_choices == 0) {
+		bestval = -999;
+		choseni = 0;
+		chosenj = -1;
+		b.calculate_moves2();
+		if (b.move_num2 == 0) {
+			endgame = true;
+		}
+	}
+	
+	//��肵���Ȃ��ꍇ
+	else if (move_choices == 1) {
+		for (int i(0); i < 8; ++i) {
+			for (int j(0);j < 8;++j) {
+				if (p_moves[i][j]) {
+					bestval = -999;
+					choseni = i;
+					chosenj = j;
+				}
+			}
+		}
+	}
+	
+	//���ȏ�
+	else {
+		vector<vector<double> > v(move_choices);
+		int n(0);
+		for (int i(0);i < 8;++i) {
+			for (int j(0);j < 8;++j) {
+				if (b.moves[i][j]) {
+					v[n].resize(3);
+					v[n][0] = 0;
+					v[n][1] = i;
+					v[n][2] = j;
+					++n;
+				}
+			}
+		}
+		
+		//�\�[�g����
+		if (level < 55) {
+			int mini(2*int((depth[level] - 8)/2));
+			for (int n(0); n < move_choices; ++n) {
+				Board b2(b);
+				b2.move_board(int(v[n][1] + 0.5), int(v[n][2] + 0.5));
+				double y(0);
+				if (mini > 0) {
+					y = -Alpbet(b2, neu, level + 1, mini, -999, 999);
+				}
+				else {
+					vector<double> x;
+					x = b2.xin(neu[level].nodes[0]);
+					y = -neu[level + 1].Forward(x)[0];
+				}
+				v[n][0] = y;
+			}
+			std::sort(v.begin(), v.end());
+			std::reverse(v.begin(), v.end());
+		}
+		
+		bestval = -999;
+		//���̃m�[�h��
+		for (int n(0);n < move_choices;++n) {
+			Board b2(b);
+			b2.move_board(int(v[n][1] + 0.5), int(v[n][2] + 0.5));
+			double nextval;
+			int num = book.number(level + 1, b2.turn, b2.square);
+			bool bookon(false);
+			if (num >= 0) {
+				double up = book.upper(level + 1, num);
+				double lo = book.lower(level + 1, num);
+				if (up == lo) {
+					nextval = -up;
+					bookon = true;
+				}
+				
+			}
+			if(!bookon) {
+				if (level + depth[level] - 1 > 63) {
+					nextval = -AlpbetE(b2, neu, level + 1, -999, -bestval);
+				}
+				else {
+					nextval = -Alpbet(b2, neu, level + 1, depth[level] - 1, -999, -bestval);
+				}
+			}
+			if (nextval > bestval) {
+				bestval = nextval;
+				choseni = int(v[n][1] + 0.5);
+				chosenj = int(v[n][2] + 0.5);
+			}
+		}
+	}
+	
+	start = false;
+	clock_t end_time = clock();
+	time_consumed = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+	return choseni * 8 + chosenj;
+}
 
 void Play::output()
 {
