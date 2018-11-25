@@ -1,0 +1,8 @@
+number:10000
+neuralnet_folder0:vn
+search_depth:3
+perfect_search:10
+random:5
+cut_ratio0:0
+step:0.02
+max_cut:0.9

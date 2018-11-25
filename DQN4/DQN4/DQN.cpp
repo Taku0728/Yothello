@@ -1,1486 +1,420 @@
 
-#include "stdafx.h" 
-#include "othello.h"
-#include "maths.h"
-#include "Learning.h"
-#include "DQN.h"
 
-static const char *mypc("DESKTOP-O9TNNR9");
+#include "dqn.hpp"
 
-DQN::DQN(string folder)
-//{time, batch, x_begin, x_end, y_begin, y_end, tests}
-	:para(0, 0),
-	net(0, 0)
-{
-	opt_file = folder + "opt.txt";
-	std::ifstream ifs(opt_file);
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-	std::string str;
-	getline(ifs, str);
-	opt_time = stoi(str);
-	getline(ifs, str);
-	teach_file = folder + str;
-	getline(ifs, str);
-	test_file = folder + str;
-	getline(ifs, str);
-	aia_file = folder + str;
-	getline(ifs, str);
-	wb_file = folder + str;
-	getline(ifs, str);
-	std::string token;
-	std::istringstream stream(str);
-	while (getline(stream, token, ',')) {
-		para.emplace_back(std::stod(token));
-	}
-	getline(ifs, str);
-	std::istringstream stream2(str);
-	while (getline(stream2, token, ',')) {
-		net.emplace_back(std::stoi(token));
-	}
+int main() {
+	view_book();
+	// montecarlo_learn("vn");
+	// auto_play();
+	// build_book();
+	// test_accuracy();
+	return 0;
 }
 
-DQN::~DQN()
-{
-	le.save(para_file);
-	neu.save(wb_file);
-
-}
-
-Teach::Teach()
-{
-}
-
-Teach::~Teach()
-{
-}
-
-void Teach::operator()(Learning &le, Neuralnet &neu, Optimizer &op, int i)
-{
-	for (int j = 0;j <= le.batch - 1;++j) {
-		neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i + j], le.teach_data_y[i + j]);
-	}
-	op(neu, le);
-}
-
-Teach8::Teach8()
-{
-}
-
-Teach8::~Teach8()
-{
-}
-
-void Teach8::operator()(Learning &le, Neuralnet &neu, Optimizer &op, int i)
-{
-	Rotate_board rtb;
-	Reflect_board rfb;
-	for (int j(0);j <= le.batch;++j) {
-		neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		for (int k(0);k < 3;++k) {
-			rtb(le.teach_data_x[i*le.batch + j]);
-			rtb(le.teach_data_y[i*le.batch + j]);
-			neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		}
-		rfb(le.teach_data_x[i*le.batch + j]);
-		rfb(le.teach_data_y[i*le.batch + j]);
-		neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		for (int k(0);k < 3;++k) {
-			rtb(le.teach_data_x[i*le.batch + j]);
-			rtb(le.teach_data_y[i*le.batch + j]);
-			neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		}
-	}
-	op(neu, le);
-}
-
-Teachv8::Teachv8()
-{
-}
-
-Teachv8::~Teachv8()
-{
-}
-
-void Teachv8::operator()(Learning &le, Neuralnet &neu, Optimizer &op, int i)
-{
-	Rotate_board rtb;
-	Reflect_board rfb;
-	for (int j(0);j <= le.batch - 1;++j) {
-		neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		for (int k(0);k < 3;++k) {
-			rtb(le.teach_data_x[i*le.batch + j]);
-			neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		}
-		rfb(le.teach_data_x[i*le.batch + j]);
-		neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		for (int k(0);k < 3;++k) {
-			rtb(le.teach_data_x[i*le.batch + j]);
-			neu.Backward(le.SdEdb, le.SdEdw, le.teach_data_x[i*le.batch + j], le.teach_data_y[i*le.batch + j]);
-		}
-	}
-	op(neu, le);
-}
-
-void DQN::run(Teach te, Optimizer op)
-{
-	Learning le;
-	le.set_parameters(para, net);
-	le.read_teach_data(teach_file);
-	le.read_test_data(test_file);
-	le.separate_data();
-	op.a = le.a;
-
-	Rotate_board rtb;
-	Reflect_board rfb;
-
-	if (opt_time == 0) {
-		neu.set_network(net);
-		double e(0);
-
-		while (e == 0) {
-			neu.initialize_bw();
-			le.test_accuracy(neu);
-			te(le, neu, op, 0);
-			le.test_accuracy(neu);
-			e = le.get_accuracy_e();
-		}
-	}
-	else {
-		le.load(para_file);
-		neu.load(wb_file);
-		op.a = le.a;
-	}
-
-	int i(0);
-	double percentage(0);
-	while (i < le.times) {
-		for (int k(0);k < 100;++k) {
-			te(le, neu, op, i);
-			++i;
-		}
-		le.test_accuracy(neu);
-		if (percentage < i * 100 / le.times) {
-			cout << percentage << "%" << endl;
-			++percentage;
-		}
-	}
-	le.write_accuracy(aia_file);
-	neu.save(wb_file);
-}
-
-void DQN::run(const Data &da, Teach te, Optimizer &op)
-{
-	Learning le;
-	le.set_parameters(para, net);
-	le.teach_data_all = da.dteach;
-	le.test_data_all = da.dtest;
-	le.separate_data();
-	op.a = le.a;
-
-	Rotate_board rtb;
-	Reflect_board rfb;
-
-	if (opt_time == 0) {
-		neu.set_network(net);
-		double e(0);
-
-		while (e == 0) {
-			neu.initialize_bw();
-			le.test_accuracy(neu);
-			te(le, neu, op, 0);
-			le.test_accuracy(neu);
-			e = le.get_accuracy_e();
-		}
-	}
-	else {
-		le.load(para_file);
-		neu.load(wb_file);
-		op.a = le.a;
-	}
-
-	int i(0);
-	double percentage(0);
-	while (i < le.times) {
-		for (int k(0);k < 100;++k) {
-			te(le, neu, op, i);
-			++i;
-		}
-		le.test_accuracy(neu);
-		if (percentage < i * 100 / le.times) {
-			cout << percentage << "%" << endl;
-			++percentage;
-		}
-	}
-	le.write_accuracy(aia_file);
-	neu.save(wb_file);
-}
-
-//int main()
-//{
-
-//	//Board b;
-//	//b.read_board_v();
-//	//b.write_board_full();
-//	clock_t start = clock();
-//	string folder("sp64_2\\");
-//	
-//	DQN dqn1(folder);
-//	Teach8 te8;
-//	SDG sdg;
-//	Adam ad;
-//	dqn1.run(te8, sdg);
-//
-//	clock_t end = clock();
-//	std::string filename = folder + "Result.txt";
-//	std::ofstream writing_file2;
-//	writing_file2.open(filename, std::ios::app);
-//	writing_file2 << "file      : " << folder << std::endl;
-//	writing_file2 << "Time Cost : " << end - start << std::endl;
-
-	//Learning le;
-	//Data d;
-	//int n(51);
-
-	//for (int i = 43;i <= n;++i) {
-	//	d.readggf("Othello.e4\\Othello." + to_string(i) + "e4.ggf", 150000);
-	//	d.writeggfwin("Othello.e4\\Othello" + to_string(i) + ".e4.csv");
-	//}
-//}
-
-TDL::TDL()
-	:readdone(false),
-	readjobdone(false),
-	running_condition(true),
-	biaslearning(false),
-	bias(1.1)
-{
-	Fill(elim_choices_ave, 0);
-	Fill(choices_ave, 0);
-	Fill(err, 0);
-}
-
-TDL::~TDL()
-{
-}
-
-void TDL::run()
-{
-	thispc = get_pcname();
-	renewcontrol_start();
-	if (running_condition == false) {
-		renewcontrol_end();
-		return;
-	}
-
-	std::ifstream ifs("control\\jobs.txt");
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-	ifs.close();
-
-	int patch(4);
-	readjob();
-	for (int l(startlevel);l >= endlevel; --l) {
-		learning_level = l;
-		renewjob();
-		renewcontrol_start();
-		if (running_condition == false) {
-			renewcontrol_end();
-			return;
-		}
-		cout << "level " << l << " >> ";
-
-		for (int i(0);i < patch;++i) {
-			learn(l, pow(0.8, i));
-			cout << (i + 1) * 25 << "% >> ";
-		}
-
-
-		if (l < 64) {
-			addsum(l);
-		}
-		cout << endl;
-	}
-	write_test();
-	renewjob();
-	renewcontrol_end();
-}
-
-void TDL::read()
-{
-	opt_file = folder1 + "opt.txt";
-	opt_file2 = folder2 + "opt.txt";
-	summary_file = folder1 + "summary.csv";
-	summary_file2 = folder2 + "summary.csv";
-	test_file = folder1 + "test.txt";
-
-	std::ifstream ifs(opt_file);
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-	std::string str;
-	getline(ifs, str);
-	opt_level = stoi(str);
-	for (int i(1);i < 65;++i) {
-		bw_file[i] = folder1 + "bw\\bw" + to_string(i) + ".csv";
-	}
-	for (int i(1);i < 65;++i) {
-		acc_file[i] = folder1 + "acc\\acc" + to_string(i) + ".csv";
-	}
-	for (int i(1);i < 65;++i) {
-		sigacc_file[i] = folder1 + "sigacc\\sigacc" + to_string(i) + ".csv";
-	}
-	policy_file = folder1 + "policy.csv";
-	getline(ifs, str);
-	std::string token;
-	std::istringstream stream(str);
-	while (getline(stream, token, ',')) {
-		para.emplace_back(std::stod(token));
-	}
-	getline(ifs, str);
-	std::istringstream stream2(str);
-	while (getline(stream2, token, ',')) {
-		net.emplace_back(std::stoi(token));
-	}
-	ifs.close();
-
-	for (int i(6);i < 65;++i) {
-		neu[i].set_network(net);
-	}
-
-	for (int i(64);i > 5;--i) {
-		std::ifstream ifs(bw_file[i]);
-		if (ifs) {
-			opt_level = i;
-		}
-		ifs.close();
-		neu[i].load(bw_file[i]);
-	}
-	//read_sum();
-
-
-	if (folder1 != folder2) {
-		std::ifstream ifs2(opt_file2);
-		if (!ifs2) {
-			std::cout << "入力エラー";
-			return;
-		}
-		getline(ifs2, str);
-		for (int i(1);i < 65;++i) {
-			bw_file2[i] = folder2 + "bw\\bw" + to_string(i) + ".csv";
-		}
-		for (int i(1);i < 65;++i) {
-			acc_file2[i] = folder2 + "acc\\acc" + to_string(i) + ".csv";
-		}
-		for (int i(1);i < 65;++i) {
-			sigacc_file2[i] = folder2 + "sigacc\\sigacc" + to_string(i) + ".csv";
-		}
-		policy_file2 = folder2 + "policy.csv";
-		getline(ifs2, str);
-		std::istringstream stream3(str);
-		while (getline(stream3, token, ',')) {
-			para2.emplace_back(std::stod(token));
-		}
-		getline(ifs2, str);
-		std::istringstream stream4(str);
-		while (getline(stream4, token, ',')) {
-			net2.emplace_back(std::stoi(token));
-		}
-		ifs2.close();
-
-		for (int i(6);i < 65;++i) {
-			neu2[i].set_network(net2);
-		}
-		opt_level2 = 65;
-		for (int i(64);i > 5;--i) {
-			std::ifstream ifs2(bw_file2[i]);
-			if (ifs2) {
-				opt_level2 = i;
-			}
-			ifs2.close();
-			neu2[i].load(bw_file2[i]);
-		}
-	}
-
-	if (biaslearning) {
-		for (int i(1);i < 65;++i) {
-			bw_file3[i] = folder3 + "bw\\bw" + to_string(i) + ".csv";
-		}
-		for (int i(64);i > 5;--i) {
-			neu3[i].load(bw_file3[i]);
-		}
-	}
-
-	//read_sum();
-
-	read_policy();
-
-	readdone = true;
-}
-
-void TDL::read_policy()
-{
-	std::ifstream ifs(policy_file);
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-	std::string str;
-	getline(ifs, str);
-	while (getline(ifs, str)) {
-		std::string token;
-		std::istringstream stream(str);
-		getline(stream, token, ',');
-		int lev = stoi(token);
-		getline(stream, token, ',');
-		opt_a[lev] = stod(token);
-		getline(stream, token, ',');
-		w[lev] = stod(token);
-		getline(stream, token, ',');
-		depth[lev] = stoi(token);
-		getline(stream, token, ',');
-		shrink[lev] = stod(token);
-	}
-	ifs.close();
-
-	if (folder1 != folder2) {
-		std::ifstream ifs2(policy_file2);
-		if (!ifs2) {
-			std::cout << "入力エラー";
-			return;
-		}
-		getline(ifs2, str);
-		while (getline(ifs2, str)) {
-			std::string token;
-			std::istringstream stream(str);
-			getline(stream, token, ',');
-			int lev = stoi(token);
-			getline(stream, token, ',');
-			opt_a2[lev] = stod(token);
-		}
-		ifs2.close();
-	}
-}
-
-void TDL::read_sum()
-{
-	std::ifstream ifs(summary_file);
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-	std::string str;
-	getline(ifs, str);
-
-	int l(65);
-	while (getline(ifs, str) && (l > opt_level + 2)) {
-		string token;
-		istringstream stream(str);
-		getline(stream, token, ',');
-		l = stoi(token);
-		getline(stream, token, ',');
-		acc[l] = stod(token);
-		getline(stream, token, ',');
-		sigacc[l] = stod(token);
-		getline(stream, token, ',');
-		err[l] = stod(token);
-		getline(stream, token, ',');
-		choices_ave[l] = stod(token);
-		getline(stream, token, ',');
-		elim_choices_ave[l] = stod(token);
-	}
-	ifs.close();
-}
-
-void TDL::readjob()
-{
-	std::ifstream ifs("control\\jobs.txt");
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-	string str;
-	getline(ifs, str);
-	if (thispc != mypc) {
-		getline(ifs, str);
-	}
-	string token;
-	istringstream stream(str);
-	getline(stream, token, ',');
-	foldername = token;
-	folder1 = token + "\\";
-	getline(stream, token, ',');
-	foldername2 = token;
-	folder2 = token + "\\";
-	getline(stream, token, ',');
-	startlevel = stoi(token);
-	getline(stream, token, ',');
-	endlevel = stoi(token);
-	getline(stream, token, ',');
-	bias = stod(token);
-	if (bias != 0) {
-		biaslearning = true;
-	}
-	if (biaslearning) {
-		getline(stream, token, ',');
-		foldername3 = token;
-		folder3 = token + "\\";
-	}
-
-	if (foldername != foldername2) {
-		cout << "LEARN " << foldername << "(BASE) & " << foldername2;
-	}
-	else {
-		cout << "LEARN " << foldername << " SELF ";
-	}
-	if (biaslearning) {
-		cout << " (PLAY WITH " << foldername3 << ")";
-	}
-	cout << endl;
-	readjobdone = true;
-	ifs.close();
-}
-
-void TDL::renewjob()
-{
-	std::ifstream ifs("control\\jobs.txt");
-	if (!ifs) {
-		std::cout << "入力エラー";
-		return;
-	}
-
-	string job1;
-	string job2;
-	string str;
-	getline(ifs, job1);
-	getline(ifs, job2);
-	ifs.close();
-
-	double temi;
-	if (biaslearning) {
-		temi = bias;
-	}
-	else {
-		temi = 0;
-	}
-	ofstream ofs;
-	ofs.open("control\\jobs.txt", std::ios::out);
-	if (thispc == mypc) {
-		ofs << foldername << "," << foldername2 << "," << learning_level << "," << 6 << "," << temi << ",";
-		if (biaslearning) {
-			ofs << foldername3 << ",";
-		}
-		ofs << endl;
-		ofs << job2 << endl;
-	}
-	else {
-		ofs << job1 << endl;
-		ofs << foldername << "," << foldername2 << "," << learning_level << "," << 6 << "," << temi << ",";
-		if (biaslearning) {
-			ofs << foldername3 << ",";
-		}
-		ofs << endl;
-	}
-	ofs.close();
-}
-
-//void TDL::learn(const int level, double as)
-//{
-//	if (!readjobdone) {
-//		readjob();
-//	}
-//	if (!readdone) {
-//		read();
-//	}
-//
-//	lea[level].set_paras(para, net);
-//	if (folder1 != folder2) {
-//		lea2[level].set_paras(para, net2);
-//	}
-//
-//	//clock_t start = clock();
-//
-//	int inputs(net[0]);
-//	int i(0);
-//	int tr(0);
-//	int iout(1);
-//	int trial(lea[level].times*lea[level].batch);
-//	while (i < trial) {
-//		Game g;
-//		Board b;
-//		b.initialize();
-//		//g.playto(b, chr, chr, level - 1);
-//		//if (!b.get_end_game()) {
-//		//}
-//
-//		//if (level > 54) {
-//		//	g.playoutvalue74(b, level);
-//		//}
-//		//else {
-//		//	g.playoutvalue74wd(b, level, neu, w, shrink);
-//		//}
-//		if (inputs == 74) {
-//			if (biaslearning) {
-//				g.ABoutbia74(b, level, neu, neu3, shrink, depth);
-//			}
-//			else {
-//				g.ABout74(b, level, neu, shrink, depth);
-//			}
-//		}
-//		else if (inputs == 102) {
-//			if (biaslearning) {
-//				g.ABoutbia102(b, level, neu, neu3, shrink, depth);
-//			}
-//			else {
-//				g.ABout102(b, level, neu, shrink, depth);
-//			}
-//		}
-//		else {
-//			return;
-//		}
-//
-//		//g.playoutvalue(b, level);
-//		//g.playout(b,level);
-//		++tr;
-//		if (g.disks == level) {
-//			//vector<double> v(65, 0);
-//			lea[level].teach_data_x[i].resize(inputs);
-//			if (folder1 != folder2) {
-//				lea2[level].teach_data_x[i].resize(inputs);
-//			}
-//			for (int j(0);j < inputs;++j) {
-//				lea[level].teach_data_x[i][j] = g.playoutb[j];
-//				if (folder1 != folder2) {
-//					lea2[level].teach_data_x[i][j] = g.playoutb[j];
-//				}
-//			}
-//			lea[level].teach_data_y[i].resize(1, g.playoutb[inputs]);
-//			if (folder1 != folder2) {
-//				lea2[level].teach_data_y[i].resize(1, g.playoutb[inputs]);
-//			}
-//			//lea.teach_data_y[i][0] = double(g.playoutb[66]);
-//			//lea.teach_data_y[i][0] = winvalue(g.playoutb[66]);
-//			++i;
-//			if (double(i) / double(trial) *10.0 > iout) {
-//				cout << iout * 10 << "% >> ";
-//				iout += 1;
-//			}
-//			//cout << i << endl;
-//		}
-//	}
-//
-//	i = 0;
-//	while (i < lea[level].tests) {
-//		Game g;
-//		Board b;
-//		b.initialize();
-//		//if (level > 54) {
-//		//	g.playoutvalue74(b, level);
-//		//}
-//		//else {
-//		//	g.playoutvalue74wd(b, level, neu, w, shrink);
-//		//}
-//		if (inputs == 74) {
-//			if (biaslearning) {
-//				g.ABoutbia74(b, level, neu, neu3, shrink, depth);
-//			}
-//			else {
-//				g.ABout74(b, level, neu, shrink, depth);
-//			}
-//		}
-//		else if (inputs == 102) {
-//			if (biaslearning) {
-//				g.ABoutbia102(b, level, neu, neu3, shrink, depth);
-//			}
-//			else {
-//				g.ABout102(b, level, neu, shrink, depth);
-//			}
-//		}
-//		//g.playoutvalue(b, chr, chr, level);
-//		//g.playout(b, chr, chr, level);
-//		++tr;
-//		if (g.disks == level) {
-//			//vector<double> v(65, 0);
-//			lea[level].test_data_x[i].resize(inputs);
-//			if (folder1 != folder2) {
-//				lea2[level].test_data_x[i].resize(inputs);
-//			}
-//			for (int j(0);j < inputs;++j) {
-//				lea[level].test_data_x[i][j] = g.playoutb[j];
-//				if (folder1 != folder2) {
-//					lea2[level].test_data_x[i][j] = g.playoutb[j];
-//				}
-//			}
-//			lea[level].test_data_y[i].resize(1, g.playoutb[inputs]);
-//			if (folder1 != folder2) {
-//				lea2[level].test_data_y[i].resize(1, g.playoutb[inputs]);
-//			}
-//			//lea.test_data_y[i][0] = double(g.playoutb[66]);
-//			//lea.teach_data_y[i][0] = winvalue(g.playoutb[66]);
-//			++i;
-//		}
-//	}
-//
-//	//clock_t mid = clock();
-//
-//	//std::string filename = folder + "testdata.csv";
-//	//std::ofstream writing_file;
-//	//writing_file.open(filename, std::ios::app);
-//	//for (int m(0);m < 50;++m) {
-//	//	for (int l(0); l < inputs;++l) {
-//	//		writing_file << lea.test_data_x[m][l] << ",";
-//	//	}
-//	//	writing_file << lea.test_data_y[m][0] << "," << endl;
-//	//}
-//
-//	//Rotate_board rtb;
-//	//Reflect_board rfb;
-//
-//	if (opt_level > 64) {
-//		neu[level].set_network(net);
-//		double e(0);
-//
-//		while (e == 0) {
-//			lea[level].t = 0;
-//			neu[level].initialize_bw();
-//			lea[level].test_accuracy(neu[level]);
-//			tea(lea[level], neu[level], opt, 0);
-//			lea[level].test_accuracy(neu[level]);
-//			e = lea[level].get_accuracy_e();
-//		}
-//		opt_level = level;
-//	}
-//	opt.a = opt_a[level] * as;
-//
-//	if (opt_level > level) {
-//		int rl(opt_level - 1);
-//		while (rl >= level) {
-//			neu[rl] = neu[rl + 1];
-//			--rl;
-//		}
-//		opt_level = level;
-//	}
-//
-//
-//	i = 0;
-//	lea[level].ai_accuracy.resize(0);
-//	lea[level].ai_accuracy_sign.resize(0);
-//	while (i < lea[level].times*lea[level].batch) {
-//		for (int k(0);k < 1000;++k) {
-//			tea(lea[level], neu[level], opt, i);
-//			++i;
-//		}
-//		lea[level].test_accuracy(neu[level]);
-//		lea[level].test_accuracy_sign(neu[level]);
-//	}
-//	lea[level].write_accuracy(acc_file[level]);
-//	lea[level].write_accuracy_sign(sigacc_file[level]);
-//	neu[level].save(bw_file[level]);
-//
-//
-//	if (folder1 != folder2) {
-//		//2も学習
-//		if (opt_level2 > level) {
-//			int rl(opt_level2 - 1);
-//			while (rl >= level) {
-//				neu2[rl] = neu2[rl + 1];
-//				--rl;
-//			}
-//			opt_level2 = level;
-//		}
-//		opt2.a = opt_a2[level] * as;
-//
-//
-//		i = 0;
-//		lea2[level].ai_accuracy.resize(0);
-//		lea2[level].ai_accuracy_sign.resize(0);
-//		while (i < lea[level].times*lea[level].batch) {
-//			for (int k(0);k < 1000;++k) {
-//				tea(lea2[level], neu2[level], opt2, i);
-//				++i;
-//			}
-//			lea2[level].test_accuracy(neu2[level]);
-//			lea2[level].test_accuracy_sign(neu2[level]);
-//		}
-//		lea2[level].write_accuracy(acc_file2[level]);
-//		lea2[level].write_accuracy_sign(sigacc_file2[level]);
-//		neu2[level].save(bw_file2[level]);
-//	}
-//
-//	//lea.save(para_file);
-//	//cout << pl << "%" << endl;
-//	//}
-//
-//	//clock_t end = clock();
-//	//std::string filename2 = folder1 + "Result.txt";
-//	//std::ofstream writing_file2;
-//	//writing_file2.open(filename2, std::ios::app);
-//	//writing_file2 << "Level    : " << level << std::endl;
-//	//writing_file2 << "TDG time : " << mid - start << std::endl;
-//	//writing_file2 << "OPT time : " << end - mid << std::endl;
-//	//writing_file2 << std::endl;
-//	//writing_file2 << "OPT time : " << end - start << std::endl;
-//
-//	//writing_file2.close();
-//}
-
-void TDL::learn(const int level, double as)
-{
-	if (!readjobdone) {
-		readjob();
-	}
-	if (!readdone) {
-		read();
-	}
-
-	lea.set_paras(para, net);
-	if (folder1 != folder2) {
-		lea2.set_paras(para, net2);
-	}
-
-	//clock_t start = clock();
-
-
-	int i(0);
-	int inputs(net[0]);
-	int iout(1);
-	int trial(lea.times*lea.batch);
-
-	while (i < trial) {
-		Game g;
-		g.bias = bias;
-		Board b;
-		b.initialize();
-		//g.playto(b, chr, chr, level - 1);
-		//if (!b.get_end_game()) {
-		//}
-
-		//if (level > 54) {
-		//	g.playoutvalue74(b, level);
-		//}
-		//else {
-		//	g.playoutvalue74wd(b, level, neu, w, shrink);
-		//}
-
-		if (biaslearning) {
-			g.ABoutbia8(b, level, neu, neu3, shrink, depth);
-		}
-		else {
-			g.ABout(b, level, neu, shrink, depth);
-		}
-
-		//g.playoutvalue(b, level);
-		//g.playout(b,level);
-		if (g.disks == level) {
-			for (int k(0);k < 8;++k) {
-				//vector<double> v(65, 0);
-				lea.teach_data_x[i].resize(inputs);
-				if (folder1 != folder2) {
-					lea2.teach_data_x[i].resize(inputs);
-				}
-				for (int j(0);j < inputs;++j) {
-					lea.teach_data_x[i][j] = g.playoutb8[k][j];
-					if (folder1 != folder2) {
-						lea2.teach_data_x[i][j] = g.playoutb8[k][j];
-					}
-				}
-				lea.teach_data_y[i].resize(1, g.playoutb8[k][inputs]);
-				if (folder1 != folder2) {
-					lea2.teach_data_y[i].resize(1, g.playoutb8[k][inputs]);
-				}
-				++i;
-				//lea.teach_data_y[i][0] = double(g.playoutb[66]);
-				//lea.teach_data_y[i][0] = winvalue(g.playoutb[66]);
-				//cout << i << endl;
-			}
-			//if (double(i) / double(trial) *10.0 > iout) {
-				//cout << iout * 10 << "% >> ";
-				//iout += 1;
-			//}
-		}
-	}
-
-
-	i = 0;
-	while ( i < lea.tests) {
-		Game g;
-		g.bias = bias;
-		Board b;
-		b.initialize();
-		//if (level > 54) {
-		//	g.playoutvalue74(b, level);
-		//}
-		//else {
-		//	g.playoutvalue74wd(b, level, neu, w, shrink);
-		//}
-
-		if (biaslearning) {
-			g.ABoutbia(b, level, neu, neu3, shrink, depth);
-		}
-		else {
-			g.ABout(b, level, neu, shrink, depth);
-		}
-
-		//g.playoutvalue(b, chr, chr, level);
-		//g.playout(b, chr, chr, level);
-		if (g.disks == level) {
-			//vector<double> v(65, 0);
-			lea.test_data_x[i].resize(inputs);
-			if (folder1 != folder2) {
-				lea2.test_data_x[i].resize(inputs);
-			}
-			for (int j(0);j < inputs;++j) {
-				lea.test_data_x[i][j] = g.playoutb[j];
-				if (folder1 != folder2) {
-					lea2.test_data_x[i][j] = g.playoutb[j];
-				}
-			}
-			lea.test_data_y[i].resize(1, g.playoutb[inputs]);
-			if (folder1 != folder2) {
-				lea2.test_data_y[i].resize(1, g.playoutb[inputs]);
-			}
-			++i;
-			//lea.test_data_y[i][0] = double(g.playoutb[66]);
-			//lea.teach_data_y[i][0] = winvalue(g.playoutb[66]);
-		}
-	}
-
-	//clock_t mid = clock();
-
-	//std::string filename = folder + "testdata.csv";
-	//std::ofstream writing_file;
-	//writing_file.open(filename, std::ios::app);
-	//for (int m(0);m < 50;++m) {
-	//	for (int l(0); l < inputs;++l) {
-	//		writing_file << lea.test_data_x[m][l] << ",";
-	//	}
-	//	writing_file << lea.test_data_y[m][0] << "," << endl;
-	//}
-
-	//Rotate_board rtb;
-	//Reflect_board rfb;
-
-	if (opt_level > 63) {
-		neu[level].set_network(net);
-		double e(0);
-
-		while (e == 0) {
-			lea.t = 0;
-			neu[level].initialize_bw();
-			lea.test_accuracy(neu[level]);
-			tea(lea, neu[level], opt, 0);
-			lea.test_accuracy(neu[level]);
-			e = lea.get_accuracy_e();
-		}
-		opt_level = level;
-	}
-	opt.a = opt_a[level] * as;
-
-	if (opt_level > level) {
-		int rl(opt_level - 1);
-		while (rl >= level) {
-			neu[rl] = neu[rl + 1];
-			--rl;
-		}
-		opt_level = level;
-	}
-
-	i = 0;
-	lea.ai_accuracy.resize(0);
-	lea.ai_accuracy_sign.resize(0);
-	while (i < lea.times*lea.batch) {
-		for (int k(0);k < 1000;++k) {
-			tea(lea, neu[level], opt, i);
-			i += lea.batch;
-		}
-		lea.test_accuracy(neu[level]);
-		lea.test_accuracy_sign(neu[level]);
-	}
-	lea.write_accuracy(acc_file[level]);
-	lea.write_accuracy_sign(sigacc_file[level]);
-	neu[level].save(bw_file[level]);
-
-
-	if (folder1 != folder2) {
-		if (opt_level2 > 63) {
-			neu2[level].set_network(net2);
-			double e(0);
-
-			while (e == 0) {
-				lea2.t = 0;
-				neu2[level].initialize_bw();
-				lea2.test_accuracy(neu2[level]);
-				tea(lea2, neu2[level], opt, 0);
-				lea2.test_accuracy(neu2[level]);
-				e = lea2.get_accuracy_e();
-			}
-			opt_level2 = level;
-		}
-		opt2.a = opt_a2[level] * as;
-
-		//2も学習
-		if (opt_level2 > level) {
-			int rl(opt_level2 - 1);
-			while (rl >= level) {
-				neu2[rl] = neu2[rl + 1];
-				--rl;
-			}
-			opt_level2 = level;
-		}
-		opt2.a = opt_a2[level] * as;
-
-
-		i = 0;
-		lea2.ai_accuracy.resize(0);
-		lea2.ai_accuracy_sign.resize(0);
-		while (i < lea.times*lea.batch) {
-			for (int k(0);k < 1000;++k) {
-				tea(lea2, neu2[level], opt2, i);
-				i += lea.batch;
-			}
-			lea2.test_accuracy(neu2[level]);
-			lea2.test_accuracy_sign(neu2[level]);
-		}
-		lea2.write_accuracy(acc_file2[level]);
-		lea2.write_accuracy_sign(sigacc_file2[level]);
-		neu2[level].save(bw_file2[level]);
-	}
-
-	//lea.save(para_file);
-	//cout << pl << "%" << endl;
-	//}
-
-	//clock_t end = clock();
-	//std::string filename2 = folder1 + "Result.txt";
-	//std::ofstream writing_file2;
-	//writing_file2.open(filename2, std::ios::app);
-	//writing_file2 << "Level    : " << level << std::endl;
-	//writing_file2 << "TDG time : " << mid - start << std::endl;
-	//writing_file2 << "OPT time : " << end - mid << std::endl;
-	//writing_file2 << std::endl;
-	//writing_file2 << "OPT time : " << end - start << std::endl;
-
-	//writing_file2.close();
-}
-
-void TDL::test(const int level)
-{
-	if (!readjobdone) {
-		readjob();
-	}
-	if (!readdone) {
-		read();
-	}
-	clock_t start = clock();
-
-	//for (int pl(0); pl < 1000;++pl) {
-
-	Learning lea;
-	lea.set_paras(para, net);
-
-	cout << " test " << level << " >> ";
-
-	int inputs(net[0]);
-	int i(0);
-	int tr(0);
-	int elim_errs(0);
-	int choices_sum(0);
-	int elim_choices_sum(0);
-	double max_abs_sum(0);
-	double max_squ_sum(0);
-	while (i < lea.tests) {
-		Game g;
-		g.bias = bias;
-		Board b;
-		b.initialize();
-		//if (level > 54) {
-		//	if (level == 64) {
-		//		g.playoutvalue74(b, level);
-		//	}
-		//	else {
-		//		g.playoutvalue74test(b, level, neu[level + 1], w[level + 1]);
-		//	}
-		//}
-		//else {
-		//	g.playoutvalue74wdtest(b, level, neu, w, shrink);
-		//}
-
-
-		if (biaslearning) {
-			g.ABoutbiatest(b, level, neu, neu3, w, shrink, depth);
-		}
-		else {
-			g.ABouttest(b, level, neu, w, shrink, depth);
-		}
-
-		if (g.elim_err) { ++elim_errs; }
-		choices_sum += g.choices;
-		elim_choices_sum += g.elim_choices;
-		max_abs_sum += g.max_abs;
-		max_squ_sum += g.max_squ;
-
-		//b.write_board_65();
-		//g.playoutvalue(b, chr, chr, level);
-		//g.playout(b, chr, chr, level);
-		++tr;
-		if (g.disks == level) {
-
-			for (int ni(0);ni < 8;++ni) {
-				for (int nj(0);nj < 8;++nj) {
-
-				}
-			}
-			//vector<double> v(65, 0);
-			vector<double> v(inputs, 0);
-			lea.test_data_x[i].resize(inputs);
-			for (int j(0);j < inputs;++j) {
-				lea.test_data_x[i][j] = g.playoutb[j];
-			}
-			lea.test_data_y[i].resize(1, g.playoutb[inputs]);
-			//lea2.test_data_y[i][0] = double(g.playoutb[66]);
-			//lea2.teach_data_y[i][0] = winvalue(g.playoutb[66]);
-			++i;
-		}
-	}
-	err[level] = double(elim_errs) / double(lea.tests);
-	choices_ave[level] = double(choices_sum) / double(lea.tests);
-	elim_choices_ave[level] = double(elim_choices_sum) / double(lea.tests);
-	max_ave[level] = max_abs_sum / double(lea.tests);
-	max_squ_ave[level] = max_squ_sum / double(lea.tests);
-	clock_t mid = clock();
-
-	//std::string filename = folder + "testdata.csv";
-	//std::ofstream writing_file;
-	//writing_file.open(filename, std::ios::app);
-	//for (int m(0);m < 50;++m) {
-	//	for (int l(0); l < inputs;++l) {
-	//		writing_file << lea2.test_data_x[m][l] << ",";
-	//	}
-	//	writing_file << lea2.test_data_y[m][0] << "," << endl;
-	//}
-
-	//lea2.load(para_file);
-
-	lea.test_accuracy(neu[level]);
-	lea.test_accuracy_sign(neu[level]);
-	acc[level] = lea.ai_accuracy[0];
-	sigacc[level] = lea.ai_accuracy_sign[0];
-	//lea2.save(para_file);
-
-	//cout << pl << "%" << endl;
-	//}
-}
-
-void TDL::sum(const int level)
-{
-	if (!readjobdone) {
-		readjob();
-	}
-	std::string filename = folder1 + "summary" + to_string(level) + ".csv";
-	std::ofstream writing_file;
-	writing_file.open(filename, std::ios::out);
-
-	writing_file << "level" << "," << "acc" << "," << "sigacc" << "," << "err" << "," << "choices" << "," << "elim_choices" << "," << "max_ave" << "," << "max_squ_ave" << "," << endl;
-	test(63);
-	for (int l(63);l >= level;--l) {
-		test(l);
-		writing_file << l << "," << acc[l] << "," << sigacc[l] << "," << max_ave[l] << "," << max_squ_ave[l] << "," << err[l] << "," << choices_ave[l] << "," << elim_choices_ave[l] << "," << endl;
-	}
-	//cout << "level: " << 61 << "," << endl;
-	//cout << 64 << "," << tdl.accuracy("vn_74\\", 64) << "," << endl;
-	//cout << level + 2 << "," << tdl.accuracy("vn_74\\", level + 2) << "," << endl;
-	//cout << level + 1 << "," << tdl.accuracy("vn_74\\", level + 1) << "," << endl;
-	//cout << level << "," << tdl.accuracy("vn_74\\", level) << "," << endl;
-	//cout << level - 1 << "," << tdl.accuracy("vn_74\\", level - 1) << "," << endl;
-	//cout << level - 2 << "," << tdl.accuracy("vn_74\\", level - 2) << "," << endl;
-	//cout << 1 << endl;
-
-}
-
-void TDL::addsum(const int level)
-{
-	if (!readjobdone) {
-		readjob();
-	}
-
-	test(level);
-	std::string filename = folder1 + "summary.csv";
-	std::ofstream writing_file;
-	writing_file.open(filename, std::ios::app);
-	writing_file << level << "," << acc[level] << "," << sigacc[level] << "," << max_ave[level] << "," << max_squ_ave[level] << "," << err[level] << "," << choices_ave[level] << "," << elim_choices_ave[level] << "," << endl;
-
-	//cout << "level: " << 61 << "," << endl;
-	//cout << 64 << "," << tdl.accuracy("vn_74\\", 64) << "," << endl;
-	//cout << level + 2 << "," << tdl.accuracy("vn_74\\", level + 2) << "," << endl;
-	//cout << level + 1 << "," << tdl.accuracy("vn_74\\", level + 1) << "," << endl;
-	//cout << level << "," << tdl.accuracy("vn_74\\", level) << "," << endl;
-	//cout << level - 1 << "," << tdl.accuracy("vn_74\\", level - 1) << "," << endl;
-	//cout << level - 2 << "," << tdl.accuracy("vn_74\\", level - 2) << "," << endl;
-	//cout << 1 << endl;
-	writing_file.close();
-}
-
-void TDL::renewcontrol_start()
-{
-	if (thispc == mypc) {
-		std::ifstream ifs("control\\status.txt");
-		if (!ifs) {
-			std::cout << "入力エラー";
-			return;
-		}
-		string str;
-		getline(ifs, str);
-		ifs.close();
-		if (str != "STOPPED") {
-			running_condition = false;
-			ifs.close();
-		}
-		std::ofstream ofs;
-		ofs.open("control\\control.txt", std::ios::out);
-		ofs << "STOP" << endl;
-		ofs.close();
-	}
-}
-
-void TDL::renewcontrol_end()
-{
-	if (thispc == mypc) {
-		std::ofstream ofs;
-		ofs.open("control\\control.txt", std::ios::out);
-		ofs << "START" << endl;
-		ofs.close();
-	}
-}
-
-Test::Test()
-{
-}
-
-Test::~Test()
-{
-}
-
-void Test::run(string folder, const int level)
-{
-	Random_choose rc;
-	Game g;
+void view_book() {
+	map<string, string> paras = map_read_file("settings_book");
+	Neuralnet neuralnet;
+	int search_depth = stoi(paras["search_depth"]);
+	string neuralnet_folder = paras["neuralnet_folder0"];
+	double cut_ratio = stod(paras["cut_ratio0"]);
+	double step_cost = stod(paras["step_cost"]);
+	double range = stod(paras["range"]);
+	neuralnet.load(neuralnet_folder + "/bw");
+	auto book = map_read_book(neuralnet_folder + "/book");
+	map<string, pair<double, double> > book_viewed;
+	
 	Board b;
 	b.initialize();
-	Neuralnet neu[65];
+	double tem_range = 0;
+	while (tem_range < range) {
+		tem_range += 0.1;
+		surf_board(b, book, book_viewed, tem_range, step_cost);
+	}
+}
 
-	std::ifstream ifs(folder + "policy.csv");
-	if (!ifs) {
-		std::cout << "入力エラー";
+void surf_board(const Board &b,
+					map<string, pair<double, double> > &m,
+					map<string, pair<double, double> > &m2,
+					const double range,
+					const double step_cost)
+{
+	if (range < 0) {
 		return;
 	}
-	double opt_a[65];
-	double w[65];
-	int depth[65];
-	double shrink[65];
-
-	std::string str;
-	getline(ifs, str);
-	while (getline(ifs, str)) {
-		std::string token;
-		std::istringstream stream(str);
-		getline(stream, token, ',');
-		int lev = stoi(token);
-		getline(stream, token, ',');
-		opt_a[lev] = stod(token);
-		getline(stream, token, ',');
-		w[lev] = stod(token);
-		getline(stream, token, ',');
-		depth[lev] = stoi(token);
-		getline(stream, token, ',');
-		shrink[lev] = stod(token);
+	auto nbs = next_boards(b);
+	vector<double> v_value(0);
+	double max_value = -99999;
+	for (auto nb : nbs) {
+		double value = 0;
+		auto info = board_in_book(nb, m);
+		auto info1 = board_in_book(nb, m2);
+		if (info.first && !info1.first) {
+			cout << "ADDING TURN: " << nb.turn << " VALUE: " << info.second.first << endl;
+			value = info.second.first;
+			nb.print();
+			cin.get();	
+			record_book(nb, m2, value, value);
+		}
+		else {
+			value = -99999;
+		}
+		v_value.emplace_back(-value);
+		max_value = max(max_value, -value);
 	}
-	ifs.close();
-
-
-	for (int i(6);i < 65;++i) {
-		neu[i].load(folder + "bw\\bw" + to_string(i) + ".csv");
+	for (int i(0); i < nbs.size(); ++i) {
+		double n_range = range - (max_value - v_value[i]) - step_cost;
+		surf_board(nbs[i], m, m2, n_range, step_cost);
 	}
-	g.ABoutbia(b, level, neu, neu, shrink, depth);
-	//g.playoutvalue74(b, level);
-	Learning lea2;
-	int inputs(neu[63].nodes[0]);
-	lea2.test_data_x.resize(10);
-	lea2.test_data_x[0].resize(inputs);
-	lea2.test_data_y.resize(5);
-	lea2.test_data_y[0].resize(5);
-	lea2.test_data_y[0][0] = g.playoutb[inputs];
-	for (int j(0);j < inputs;++j) {
-		lea2.test_data_x[0][j] = g.playoutb[j];
+}
+
+
+void explore_board(const Neuralnet neuralnet,
+					const Board &b,
+					map<string, pair<double, double> > &m,
+					const int depth,
+					const double cut_ratio,
+					const double range,
+					const double step_cost)
+{
+	if (range < 0) {
+		return;
+	}
+	auto nbs = next_boards(b);
+	vector<double> v_value(0);
+	double max_value = -99999;
+	for (auto nb : nbs) {
+		double value = 0;
+		auto info = board_in_book(nb, m);
+		if (!info.first) {
+			nb.calculate_disks();
+			value = AB_value(nb, neuralnet, nb.disks1 + nb.disks2, depth, -99999, 99999, cut_ratio);
+			record_book(nb, m, value, value);
+			cout << "ADDING TURN: " << nb.turn << " VALUE: " << value << endl;
+			nb.print();
+		}
+		else {
+			value = info.second.first;
+		}
+		v_value.emplace_back(-value);
+		max_value = max(max_value, -value);
+	}
+	for (int i(0); i < nbs.size(); ++i) {
+		double n_range = range - (max_value - v_value[i]) - step_cost;
+		explore_board(neuralnet, nbs[i], m, depth, cut_ratio, n_range, step_cost);
+	}
+}
+
+void auto_play() {
+	map<string, string> paras = map_read_file("settings");
+	int search_depth0 = stoi(paras["search_depth0"]);
+	int search_depth1 = stoi(paras["search_depth1"]);
+	int perfect_search0 = stoi(paras["perfect_search0"]);
+	int perfect_search1 = stoi(paras["perfect_search1"]);
+	int games = stoi(paras["games"]);
+	string neuralnet_folder0 = paras["neuralnet_folder0"];
+	string neuralnet_folder1 = paras["neuralnet_folder1"];
+	bool perfect_random = stoi(paras["perfect_random"]);
+	bool show_all = stoi(paras["show_all"]);
+	double cut_ratio0 = stod(paras["cut_ratio0"]);
+	double cut_ratio1 = stod(paras["cut_ratio1"]);
+
+	Neuralnet neuralnet0, neuralnet1;
+	neuralnet0.load(neuralnet_folder0 + "/bw");
+	neuralnet1.load(neuralnet_folder1 + "/bw");
+	auto book0 = map_read_book(neuralnet_folder0 + "/book");
+	auto book1 = map_read_book(neuralnet_folder1 + "/book");
+	double error0(0), error1(0), time0(0), time1(0);
+	double random = stod(paras["random"]);
+	int win0 = 0;
+	int win1 = 0;
+	for (int i(0); i < games; ++i) {
+		bool end(false);
+		Board b;
+		b.initialize();
+		int weight = i % 2 ? -1 : 1;
+		int disks = 4;
+		double value0(0), value1(0);
+		int number(0);
+		while (!end) {
+			Timer timer;
+			bool neuralnet0_turn = (b.turn == 1) ^ (i % 2);
+			int search_depth = neuralnet0_turn ? search_depth0 : search_depth1;
+			int perfect_search = neuralnet0_turn ? perfect_search0 : perfect_search1;
+			int depth = disks + perfect_search >= 64 ? 99 : search_depth;
+			double c_ratio = neuralnet0_turn ? cut_ratio0 : cut_ratio1;
+			Neuralnet neuralnet = neuralnet0_turn ? neuralnet0 : neuralnet1;
+			auto book = neuralnet0_turn ? book0 : book1;
+			double r = (perfect_random || depth < 99) ? random : 0;
+			double v = AB_move(book, b, neuralnet, b.disks1 + b.disks2, depth, r, c_ratio);
+			auto t = timer.count();
+			value0 += (neuralnet0_turn && depth < 99 ? 1 : 0) * v;
+			value1 += (neuralnet0_turn && depth < 99 ? 0 : 1) * v;
+			time0 += (neuralnet0_turn ? 1 : 0) * t;
+			time1 += (neuralnet0_turn ? 0 : 1) * t;
+			++number;
+			if (show_all) {
+				cout << neuralnet_folder0 << ": " << (i % 2 ? "WHITE" : "BLACK") << endl;
+				cout << "VALUE: " << v * (neuralnet0_turn ? 1 : -1) << endl;
+				cout << "TIME: " << t / 1000 << endl;
+				cout << "DISKS: " << disks / 1000 << endl;
+				b.print();
+			}
+			b.calculate_disks();
+			disks = b.disks1 + b.disks2;
+			if (disks == 64 || b.is_end_game()) {
+				end = true;
+			}
+		}
+		if (!show_all) {
+			b.print();
+		}
+		error0 += abs((b.disks1 - b.disks2) * weight - value0 / number);
+		error1 += abs((b.disks1 - b.disks2) * weight - value1 / number);
+		win0 += ((b.disks1 - b.disks2) * weight) > 0;
+		win1 += ((b.disks1 - b.disks2) * -weight) > 0;
+		cout << (((b.disks1 - b.disks2) * weight) > 0 ? neuralnet_folder0 : neuralnet_folder1)
+			<< " WIN " << b.disks1 - b.disks2 << endl << endl;
+	}
+	cout << "RATE " << neuralnet_folder0 << " " << win0 * 100. / games << "%" <<
+		" : " << neuralnet_folder1 << " " << win1 * 100. / games << "%" << endl;
+	cout << "ERROR " << neuralnet_folder0 << " " << error0 / games << 
+		" : " << neuralnet_folder1 << " " << error1 / games << endl;
+	cout << "TIME " << neuralnet_folder0 << " " << time0 / games << 
+		" : " << neuralnet_folder1 << " " << time1 / games << endl;
+	std::ofstream writing_file("record.csv", std::ios::app);
+	writing_file << "RATE " << neuralnet_folder0 << " " << win0 * 100. / games << "%" <<
+		" : " << neuralnet_folder1 << " " << win1 * 100. / games << "%" << endl;
+	writing_file << "ERROR " << neuralnet_folder0 << " " << error0 / games << 
+		" : " << neuralnet_folder1 << " " << error1 / games << endl;
+	writing_file << "TIME " << neuralnet_folder0 << " " << time0 / games << 
+		" : " << neuralnet_folder1 << " " << time1 / games << endl;
+    writing_file.close();
+}
+
+
+void montecarlo_learn(const string neuralnet_folder) {
+	Learning ml;
+	ml.load(neuralnet_folder + "/opt.txt");
+
+	Neuralnet neuralnet;
+	neuralnet.load(neuralnet_folder + "/bw");
+	auto book = map_read_book(neuralnet_folder + "/book");
+	if (!neuralnet.loaded) {
+		neuralnet.set_network(ml.net);
+		neuralnet.initialize_bw();
+	}
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<> urd(0.0, 1.0);
+	int inputs(neuralnet.nodes[0]);
+	Optimizer opt;
+	opt.a = ml.a;
+	
+	for (int l(0); l < ml.learns; ++l) {
+		--ml.bottom_disks;
+		ml.bottom_disks = max(7, ml.bottom_disks);
+		Timer timer0;
+		cout << "LEARNING " << l << "/" << ml.learns << endl;
+		cout << "\tPLAYING >> ";
+		vector<Board> boards = random_play_boards(
+			ml.games, book, neuralnet, ml.bottom_disks, ml.top_disks, ml.playing_search_depth, ml.random, ml.cut_ratio);
+		vector<pair<Board, double> > dataset;
+		cout << boards.size() << endl;
+		cout << "\tVALUING >> ";
+		vector<pair<double, Board> > display(0);
+		vector<pair<int, double> > times(64, pair<int, double>(0, 0));
+		for (auto b : boards) {
+			b.calculate_disks();
+			int disks = b.disks1 + b.disks2;
+			int depth = disks + ml.perfect_search_depth >= 64 ? 99 : ml.teaching_search_depth;
+			depth -= urd(mt) < 0.5 ? 1 : 0;
+			depth += disks > 44 ? 1 : 0;
+			Timer timer1;
+			vector<pair<int, int> > route(0);
+			double value = AB_value(b, neuralnet, disks, depth, -99999, 99999, ml.cut_ratio, route);
+			++times[disks].first;
+			times[disks].second += timer1.count();
+			dataset.emplace_back(pair<Board, double>(b, value));
+			double tem_value = value;
+			if (depth < 20) {
+				continue;
+			}
+			for (int i(0); i < route.size() && disks + i < ml.top_disks; ++i) {
+				tem_value *= -1;
+				b.move_board(route[i].first, route[i].second);
+				dataset.emplace_back(pair<Board, double>(b, tem_value));
+			}
+		}
+		cout << dataset.size() << endl;
+		print_order(times, ml.show_time);
+
+		vector<pair<Board, double> > dataset8;
+		cout << "\tEXTENDING >> ";
+		for (auto d : dataset) {
+			Board b(d.first);
+			double value(d.second);
+			for (int i = 0; i != 4; ++i) {
+				dataset8.emplace_back(pair<Board, double>(b, value));
+				b.rotate();
+			}
+			b.reflect();
+			for (int i = 0; i != 4; ++i) {
+				dataset8.emplace_back(pair<Board, double>(b, value));
+				b.rotate();
+			}
+		}
+		cout << dataset8.size() << endl;
+		vector<pair<vector<double>, vector<double> > > train_dataset;
+		for (auto d : dataset8) {
+			train_dataset.emplace_back(pair<vector<double>, vector<double> >
+				(d.first.xin(inputs), vector<double> ({d.second})));
+		}
+		double test_loss = 0;
+		ml.clearS();
+		for (auto b : train_dataset) {
+			neuralnet.Backward(ml.SdEdb, ml.SdEdw, b.first, b.second);
+			double loss = pow(neuralnet.Forward(b.first)[0] - b.second[0], 2);
+			test_loss += loss;
+		}
+		test_loss /= train_dataset.size();
+		cout << "\tTEST LOSS: " << test_loss << endl;
+
+		double train_loss = 0;
+		for (int epoch(0); epoch < ml.n_epoch; ++epoch) {
+			vector<int> perm(random_permutation(train_dataset.size(), mt));
+			double sum_loss = 0;
+			for (int i(0); i < train_dataset.size() - ml.batch; i += ml.batch) {
+				vector<pair<vector<double>, vector<double> > > train_batch;
+				for (int j(0); j < ml.batch; ++j) {
+					train_batch.emplace_back(train_dataset[perm[i+j]]);
+				}
+				ml.clearS();
+				for (auto b : train_batch) {
+					neuralnet.Backward(ml.SdEdb, ml.SdEdw, b.first, b.second);
+					double loss = pow(neuralnet.Forward(b.first)[0] - b.second[0], 2);
+					sum_loss += loss;
+				}
+				opt(neuralnet, ml);
+			}
+			sum_loss /= train_dataset.size();
+			train_loss += sum_loss;
+			cout << "\t" << "EPOCH " << epoch << "/" << ml.n_epoch << " | " << "LOSS: " << sum_loss << endl;
+		}
+		train_loss /= ml.n_epoch;
+		neuralnet.save(neuralnet_folder + "/bw");
+		
+		double sec = timer0.count() / 1000;
+		cout << "\tTIME: " << sec << endl;
+		ml.save_log(neuralnet_folder + "/log", train_loss, test_loss, sec);
+
+		int index = int(urd(mt) * dataset.size());
+		vector<double> x = dataset[index].first.xin(inputs);
+		cout << endl << dataset[index].first.turn << " " << dataset[index].second << " " << neuralnet.Forward(x)[0] << endl;
+		dataset[index].first.print();
+	}
+}
+
+
+void build_book()
+{
+	map<string, string> paras = map_read_file("settings_book");
+	Neuralnet neuralnet;
+	int search_depth = stoi(paras["search_depth"]);
+	string neuralnet_folder = paras["neuralnet_folder0"];
+	double cut_ratio = stod(paras["cut_ratio0"]);
+	double step_cost = stod(paras["step_cost"]);
+	double range = stod(paras["range"]);
+	neuralnet.load(neuralnet_folder + "/bw");
+	auto m = map_read_book(neuralnet_folder + "/book");
+	
+
+	Board b;
+	b.initialize();
+	double tem_range = 0;
+	while (tem_range < range) {
+		tem_range += 0.1;
+		explore_board(neuralnet, b, m, search_depth, cut_ratio, tem_range, step_cost);
+		map_save_book(neuralnet_folder + "/book", m);
+		cout << "SAVED" << endl;
+	}
+}
+
+void test_accuracy() {
+	map<string, string> paras = map_read_file("settings_test");
+	Neuralnet neuralnet;
+	int number = stoi(paras["number"]);
+	int search_depth = stoi(paras["search_depth"]);
+	string neuralnet_folder = paras["neuralnet_folder0"];
+	double cut_ratio = stod(paras["cut_ratio0"]);
+	double random = stod(paras["random"]);
+	double step = stod(paras["step"]);
+	double max_cut = stod(paras["max_cut"]);
+
+	neuralnet.load(neuralnet_folder + "/bw");
+	auto book = map_read_book(neuralnet_folder + "/book");
+	vector<Board> vb = random_play_boards(number, book, neuralnet, search_depth, random, cut_ratio);
+	vector<double> result(int(max_cut/step),0);
+	int count = 0;
+	for (auto b : vb) {
+		b.calculate_disks();
+		int disks = b.disks1 + b.disks2;
+		auto nbs = next_boards(b);
+		if (nbs.size() == 0) {
+			continue;
+		}
+		double sum_ratio(0);
+		double max_con_value = -99999.;
+		int max_index = 0;
+		vector<pair<int, double> > vr;
+		for (int i = 0; i != nbs.size(); ++i) {
+			double value = -AB_value(nbs[i], neuralnet, disks + 1, 1, -99999, 99999, 0);
+			double con_value = -AB_value(nbs[i], neuralnet, disks + 1, 2, -99999, 99999, 0);
+			if (max_con_value < con_value) {
+				max_con_value = con_value;
+				max_index = i;
+			}
+			double ratio = pow(2, value / 5.);
+			sum_ratio += ratio;
+			vr.emplace_back(pair<int, double>(i, ratio));
+		}
+		sort(begin(vr), end(vr), 
+			[](auto &l, auto &r){ return l.second > r.second; });
+		
+		vector<double> tem_result(int(max_cut/step), 0);
+		for (int i(0); i < int(max_cut/step); ++i) {
+			double w((i + 1.) * step);
+			double tem_ratio(0);
+			bool is_contained(false);
+			for (int j = 0; j < vr.size(); ++j) {
+				if (vr[j].first == max_index) {
+					is_contained = true;
+				}
+				tem_ratio += vr[j].second;
+				if (tem_ratio > sum_ratio * (1. - w)) {
+					break;
+				}
+			}
+			tem_result[i] += is_contained ? 1. : 0.;
+		}
+		++count;
+		for (int i(0); i < int(max_cut/step); ++i) {
+			result[i] += tem_result[i];
+		}
 	}
 
-	std::string filename = folder + "test.csv";
-	std::ofstream writing_file;
-	writing_file.open(filename, std::ios::out);
+	cout << "STEP: " << step << endl;
+	for (int i(0); i < int(max_cut/step); ++i) {
+		cout << i * step << ": " << result[i] / count << endl;
+	}
 
-	b.playerturnboard();
-	for (int i(0);i < 8;++i) {
-		writing_file << "row " + to_string(i) << ",";
-		for (int j(0);j < 8;++j) {
-			writing_file << b.square[i][j] << ",";
+	std::ofstream writing_file(neuralnet_folder + "/acc.csv", std::ios::out);
+	writing_file << "cut_ratio,error1,error2,error3,error4,error5,error6" << endl;
+	for (int i(0); i < int(max_cut/step); ++i) {
+		writing_file << i * step << "," << std::fixed;
+		for (int j(1); j < 9; ++j) {
+			writing_file << std::setprecision(4) << pow(result[i] / count, j) << ",";
 		}
 		writing_file << endl;
 	}
-	writing_file << endl;
-
-	writing_file << "spot disks1" << ",";
-	for (int i(0);i < 10;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot disks2" << ",";
-	for (int i(10);i < 20;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot moves1" << ",";
-	for (int i(20);i < 29;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot moves2" << ",";
-	for (int i(29);i < 38;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot fixed1" << ",";
-	for (int i(38);i < 47;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot fixed2" << ",";
-	for (int i(47);i < 56;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot openness1" << ",";
-	for (int i(56);i < 65;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "spot openness2" << ",";
-	for (int i(65);i < 74;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "moutains1" << ",";
-	writing_file << lea2.test_data_x[0][74] << ",";
-	writing_file << endl;
-	writing_file << "moutains2" << ",";
-	writing_file << lea2.test_data_x[0][75] << ",";
-	writing_file << endl;
-	writing_file << "wings1" << ",";
-	writing_file << lea2.test_data_x[0][76] << ",";
-	writing_file << endl;
-	writing_file << "wings2" << ",";
-	writing_file << lea2.test_data_x[0][77] << ",";
-	writing_file << endl;
-	writing_file << "sides1" << ",";
-	for (int i(78);i < 82;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "sides2" << ",";
-	for (int i(82);i < 86;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << "corner" << ",";
-	for (int i(86);i < 90;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << "xcorner" << ",";
-	for (int i(90);i < 94;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << "bycorner" << ",";
-	for (int i(94);i < 102;++i) {
-		writing_file << lea2.test_data_x[0][i] << ",";
-	}
-	writing_file << endl;
-	writing_file << "dif" << "," << lea2.test_data_y[0][0] << "," << endl;
-
-
-
-	//writing_file << "spot disks1" << ",";
-	//for (int i(0);i < 10;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot disks2" << ",";
-	//for (int i(10);i < 20;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot moves1" << ",";
-	//for (int i(20);i < 29;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot moves2" << ",";
-	//for (int i(29);i < 38;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot fixed1" << ",";
-	//for (int i(38);i < 47;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot fixed2" << ",";
-	//for (int i(47);i < 56;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot openness1" << ",";
-	//for (int i(56);i < 65;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "spot openness2" << ",";
-	//for (int i(65);i < 74;++i) {
-	//	writing_file << g.playoutb[i] << ",";
-	//}
-	//writing_file << endl;
-	//writing_file << "dif" << "," << g.playoutb[74] << "," << endl;
-	writing_file.close();
-}
-
-void TDL::write_test()
-{
-	if (!readjobdone) {
-		readjob();
-	}
-	if (!readdone) {
-		read();
-	}
-	std::ofstream writing_file;
-	writing_file.open(test_file, std::ios::out);
-	for (int i(63); i > opt_level; --i) {
-		double yout(0);
-		double yout2(0);
-		for (int j(0); j < 1000; ++j) {
-			Random_choose rc;
-			Board b;
-			b.initialize();
-			Game g;
-			g.bias = bias;
-			g.playto(b, rc, rc, i);
-			yout += abs(neu[i].Forward(b.x206())[0]);
-			yout2 += pow(neu[i].Forward(b.x206())[0], 2);
-
-		}
-		yout /= 1000;
-		yout2 /= 1000;
-		writing_file << i << "," << yout << "," << yout2 << endl;
-	}
-	writing_file.close();
+    writing_file.close();
 }

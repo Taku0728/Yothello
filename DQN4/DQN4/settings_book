@@ -1,0 +1,5 @@
+neuralnet_folder0:vn
+search_depth:12
+cut_ratio0:0.1
+step_cost:2
+range:100

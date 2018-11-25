@@ -1,0 +1,15 @@
+net:271,8,8,1
+learns:10000
+n_epoch:100
+games:50
+batch:128
+t:1
+a:0.000001
+bottom_disks:8
+top_disks:55
+playing_search_depth:4
+teaching_search_depth:8
+perfect_search_depth:16
+random:2
+show_time:5
+cut_ratio:0.2

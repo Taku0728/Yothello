@@ -45,16 +45,16 @@
       0,
       0,
       0,
-      -1,
-      1,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       1,
       -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -1,
+      1,
       0,
       0,
       0,
@@ -91,7 +91,10 @@
       value: 0
     }
   };
-
+  var supportTouch = "ontouchend" in document;
+  var EVENTNAME_TOUCHSTART = supportTouch ? "touchstart" : "mousedown";
+  var EVENTNAME_TOUCHMOVE = supportTouch ? "touchmove" : "mousemove";
+  var EVENTNAME_TOUCHEND = supportTouch ? "touchend" : "mouseup";
   function initGame(_ctx) {
     ctx = _ctx;
     state = objCopy(init_state);
@@ -110,81 +113,53 @@
       isTouch = false;
     }
     if (isTouch) {
-      ctx.canvas.addEventListener("touchstart", ev_mouseClick);
+      ctx.canvas.addEventListener(EVENTNAME_TOUCHSTART, ev_mouseClick);
     } else {
-      ctx.canvas.addEventListener("mousemove", ev_mouseMove);
-      ctx.canvas.addEventListener("mouseup", ev_mouseClick);
+      window.addEventListener(EVENTNAME_TOUCHMOVE, ev_mouseMove);
+      ctx.canvas.addEventListener(EVENTNAME_TOUCHEND, ev_mouseClick);
     }
   }
 
   function ev_mouseMove(e) {
-    getMousePosition(e);
+    updateXY(e);
     state.selected = hitTest(point.x, point.y);
     Render.render(ctx, state, point);
   }
 
   function ev_mouseClick(e) {
+    updateXY(e);
     var selected = hitTest(point.x, point.y);
     var number;
     if (selected.name === "RECT_BOARD") {
       number = selected.value;
       if (Ai.canPut(state.map, selected.value, state.turn) === true) {
         var end = false;
-        while (!end) {
+        if (!end) {
           state.map = Ai.putMap(state.map, selected.value, state.turn);
           state.turn = -1 * state.turn;
           state.revision += 1;
           Render.render(ctx, state, point);
 
           setTimeout(function() {
-            var flag = false;
-            // テスト
-            var _number = -1;
-            while (!flag) {
-              _number = Ai.thinkAI(state.map, state.turn, 6)[0];
-              if (_number == -1) {
-                flag = !Ai.hasMove(state.map, state.turn);
-              } else {
-                flag = Ai.canPut(state.map, _number, state.turn);
-              }
-            }
-            if (_number == -1) {
-              state.turn *= -1;
-            } else {
-              state.map = Ai.putMap(state.map, _number, state.turn);
-              state.turn *= -1;
-              state.revision += 1;
-              Render.render(ctx, state, point);
-            }
+            Ai.thinkAI(state, ctx, point);
           }, 100);
-          // PASS判定
-          end = Ai.hasMove(state.map, state.turn);
-          if (!end) {
-            var game_set = Ai.hasMove(state.map, -state.turn);
-            if (game_set) {
-              return;
-            }
-          }
         }
       }
     }
   }
 
-  function getMousePosition(e) {
-    if (!e.clientX) {
-      //SmartPhone
-      if (e.touches) {
-        e = e.originalEvent.touches[0];
-      } else if (e.originalEvent.touches) {
-        e = e.originalEvent.touches[0];
-      } else {
-        e = event.touches[0];
-      }
-    }
+  var updateXY = function(e) {
+    var original = e.originalEvent;
     var rect = e.target.getBoundingClientRect();
-    point.x = e.clientX - rect.left;
-    point.y = e.clientY - rect.top;
-  }
+    if (e.touches) {
+      console.log("touch");
+      point.x = e.touches[0].pageX - rect.left;
+      point.y = e.touches[0].pageY - rect.top;
+    } else {
+      point.x = e.pageX - rect.left;
+      point.y = e.pageY - rect.top;
+    }
+  };
 
   function hitTest(x, y) {
     var objects = [Render.RECT_BOARD];

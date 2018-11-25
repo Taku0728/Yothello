@@ -1,0 +1,10 @@
+games:200
+neuralnet_folder0:vn
+neuralnet_folder1:vn10
+search_depth:10
+perfect_search:18
+random:0
+perfect_random:0
+show_all:0
+cut_ratio0:0.1
+cut_ratio1:0.1

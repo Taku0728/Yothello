@@ -1,0 +1,33 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "chrono": "cpp",
+        "ostream": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp",
+        "cstddef": "cpp",
+        "exception": "cpp",
+        "initializer_list": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "strstream": "cpp",
+        "cfenv": "cpp",
+        "cctype": "cpp",
+        "cmath": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "istream": "cpp",
+        "ios": "cpp"
+    }
+}

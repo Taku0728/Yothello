@@ -168,29 +168,31 @@
   }
 
   function bi_to_hex(arr) {
-    var hex = 0;
-    var d = 1;
-    for (let i = arr.length - 1; i >= 0; --i) {
-      hex += arr[i] * d;
-      d *= 2;
+    var s = "";
+    for (let n = arr.length / 4 - 1; n >= 0; --n) {
+      var hex = 0;
+      var d = 1;
+      for (let i = 3; i >= 0; --i) {
+        hex += arr[n * 4 + i] * d;
+        d *= 2;
+      }
+      s = hex.toString(16) + s;
     }
-    return hex.toString(16);
+    return s;
   }
 
   function map_to_hex(map) {
-    var map_black = Array(64);
-    map_black = map_black.map(function() {
+    var map_black = Array.apply(null, Array(64)).map(function() {
       return 0;
     });
-    var map_white = Array(64);
-    map_white = map_white.map(function() {
+    var map_white = Array.apply(null, Array(64)).map(function() {
       return 0;
     });
     for (let index = 0; index < map.length; index++) {
       if (map[index] == -1) {
-        map_black = 1;
+        map_black[index] = 1;
       } else if (map[index] == 1) {
-        map_white = 1;
+        map_white[index] = 1;
       }
     }
     var hex_black = bi_to_hex(map_black);
@@ -206,9 +208,54 @@
     }
     return hex;
   }
+  function request(arg) {}
 
-  function thinkAI(map, turn_player) {
-    var arg = map_to_hex(map) + turn_to_hex(turn_player);
-    return Math.floor(Math.random() * 65);
+  function thinkAI(state, ctx, point) {
+    $("body").append("<p>Hello</p>");
+    var arg = map_to_hex(state.map) + turn_to_hex(state.turn);
+    console.log(arg);
+    var count = 0;
+    $.ajax({
+      url:
+        "https://ezatqspasg.execute-api.ap-southeast-1.amazonaws.com/default/reverseproxy?board=" +
+        arg,
+      type: "GET",
+      //通信状態に問題がないかどうか
+      success: function(res) {
+        console.log(res);
+        if (res == -1) {
+          state.turn *= -1;
+        } else {
+          state.map = Ai.putMap(state.map, res, state.turn);
+          state.turn *= -1;
+          state.revision += 1;
+        }
+        Render.render(ctx, state, point);
+        // PASS判定
+        if (!Ai.hasMove(state.map, state.turn)) {
+          state.turn *= -1;
+          if (Ai.hasMove(state.map, state.turn)) {
+            console.log("PASS");
+            setTimeout(function() {
+              $("body").append("<p>Goodbye</p>");
+              Ai.thinkAI(state, ctx, point);
+            }, 100);
+          } else {
+            $("body").append("<p>Goodbye</p>");
+            console.log("END");
+          }
+        } else {
+          $("body").append("<p>Goodbye</p>");
+        }
+      },
+      //通信エラーになった場合の処理
+      error: function(err) {
+        if (count > 1) {
+          return;
+        }
+        count += 1;
+        request(arg);
+      }
+    });
   }
 })((this || 0).self || global);

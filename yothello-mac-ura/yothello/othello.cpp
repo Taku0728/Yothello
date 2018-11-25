@@ -9873,8 +9873,9 @@ double AlpbetE(Board &b1, Neuralnet(&neu)[65], int disks, double alp, double bet
 	int inputs(neu[disks].nodes[0]);
 	
 	//���B
-	if (disks == 63) {
-		return -b1.diskdif63();
+	if (disks == 64) {
+		b1.calculate_disks();
+		return (b1.turn == 1 ? -1. : 1.) * (b1.disks1 - b1.disks2);
 	}
 	
 	//�\�[�g���Ȃ�

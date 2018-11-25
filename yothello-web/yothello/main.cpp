@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 {
 	// unsigned long long 
 
-	int player;
 	int type;
 	string black("");
 	string white("");
@@ -51,6 +50,8 @@ int main(int argc, char **argv)
 			p1.b.square[i][j] = square_init[i][j];
 		}
 	}
+	p1.b.turn = turn;
+	p1.b.turnnot = turn == 1 ? 2 : 1;
 	if (turn == 2) {
 		p1.player = 2;
 		p1.opponent = 1;
