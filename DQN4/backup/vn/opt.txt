@@ -11,5 +11,5 @@ playing_search_depth:4
 teaching_search_depth:8
 perfect_search_depth:16
 random:2
-show_time:0
+show_time:5
 cut_ratio:0.10

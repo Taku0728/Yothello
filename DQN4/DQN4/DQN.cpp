@@ -3,8 +3,8 @@
 #include "dqn.hpp"
 
 int main() {
-	view_book();
-	// montecarlo_learn("vn");
+	// view_book();
+	montecarlo_learn("vn");
 	// auto_play();
 	// build_book();
 	// test_accuracy();
@@ -309,8 +309,11 @@ void montecarlo_learn(const string neuralnet_folder) {
 
 		int index = int(urd(mt) * dataset.size());
 		vector<double> x = dataset[index].first.xin(inputs);
-		cout << endl << dataset[index].first.turn << " " << dataset[index].second << " " << neuralnet.Forward(x)[0] << endl;
+		cout << endl;
 		dataset[index].first.print();
+		cout << "TURN: " <<  dataset[index].first.turn
+			 << "TRUTH: " << dataset[index].second
+			<< "VALUE: " << neuralnet.Forward(x)[0] << endl;
 	}
 }
 
