@@ -893,7 +893,7 @@ void SDG::operator()(Neuralnet &net, Learning &le)
         for (int n1 = 0; n1 < net.nodes[i + 1]; ++n1) {
             net.bia[i][n1] -= a * le.SdEdb[i][n1] / le.batch;
             for (int n0 = 1; n0 < net.nodes[i]; ++n0) {
-                net.wei[i][n1][n0] -= a * le.SdEdw[i][n1][n0] / net.nodes[i] / le.batch;
+                net.wei[i][n1][n0] -= a * le.SdEdw[i][n1][n0] / le.batch;
             }
         }
     }
@@ -903,7 +903,7 @@ void SDG::operator()(Neuralnet &net, Learning &le)
 Learning::Learning()
 :learns(1000),
 n_epoch(10),
-batch(32),
+batch(128),
 test_ratio(0.1),
 t(0),
 a(0.001),

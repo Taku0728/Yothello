@@ -1,0 +1,6 @@
+neuralnet_folder:vn
+search_depth:7
+perfect_search:14
+random:0.3
+perfect_random:0
+cut_ratio:0.15

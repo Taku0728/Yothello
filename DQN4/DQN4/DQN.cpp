@@ -3,8 +3,8 @@
 #include "dqn.hpp"
 
 int main() {
-	// view_book();
-	montecarlo_learn("vn");
+	view_book();
+	// montecarlo_learn("vn");
 	// auto_play();
 	// build_book();
 	// test_accuracy();

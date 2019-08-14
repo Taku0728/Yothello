@@ -12,6 +12,63 @@ int main() {
 	return 0;
 }
 
+void view_book() {
+	map<string, string> paras = map_read_file("settings_book");
+	Neuralnet neuralnet;
+	int search_depth = stoi(paras["search_depth"]);
+	string neuralnet_folder = paras["neuralnet_folder0"];
+	double cut_ratio = stod(paras["cut_ratio0"]);
+	double step_cost = stod(paras["step_cost"]);
+	double range = stod(paras["range"]);
+	neuralnet.load(neuralnet_folder + "/bw");
+	auto book = map_read_book(neuralnet_folder + "/book");
+	map<string, pair<double, double> > book_viewed;
+	
+	Board b;
+	b.initialize();
+	double tem_range = 0;
+	while (tem_range < range) {
+		tem_range += 0.1;
+		surf_board(b, book, book_viewed, tem_range, step_cost);
+	}
+}
+
+
+void surf_board(const Board &b,
+					map<string, pair<double, double> > &m,
+					map<string, pair<double, double> > &m2,
+					const double range,
+					const double step_cost)
+{
+	if (range < 0) {
+		return;
+	}
+	auto nbs = next_boards(b);
+	vector<double> v_value(0);
+	double max_value = -99999;
+	for (auto nb : nbs) {
+		double value = 0;
+		auto info = board_in_book(nb, m);
+		auto info1 = board_in_book(nb, m2);
+		if (info.first && !info1.first) {
+			cout << "ADDING TURN: " << nb.turn << " VALUE: " << info.second.first << endl;
+			value = info.second.first;
+			nb.print();
+			cin.get();	
+			record_book(nb, m2, value, value);
+		}
+		else {
+			value = -99999;
+		}
+		v_value.emplace_back(-value);
+		max_value = max(max_value, -value);
+	}
+	for (int i(0); i < nbs.size(); ++i) {
+		double n_range = range - (max_value - v_value[i]) - step_cost;
+		surf_board(nbs[i], m, m2, n_range, step_cost);
+	}
+}
+
 void explore_board(const Neuralnet neuralnet,
 					const Board &b,
 					map<string, pair<double, double> > &m,
@@ -111,12 +168,13 @@ void auto_play() {
 		if (!show_all) {
 			b.print();
 		}
-		error0 += abs((b.disks1 - b.disks2) * weight - value0 / number);
-		error1 += abs((b.disks1 - b.disks2) * weight - value1 / number);
-		win0 += ((b.disks1 - b.disks2) * weight) > 0;
-		win1 += ((b.disks1 - b.disks2) * -weight) > 0;
-		cout << (((b.disks1 - b.disks2) * weight) > 0 ? neuralnet_folder0 : neuralnet_folder1)
-			<< " WIN " << b.disks1 - b.disks2 << endl << endl;
+		error0 += abs(-(b.disks1 - b.disks2) * weight - value0 / number);
+		error1 += abs(-(b.disks1 - b.disks2) * weight - value1 / number);
+		win0 += (-(b.disks1 - b.disks2) * weight) > 0;
+		win1 += (-(b.disks1 - b.disks2) * -weight) > 0;
+		cout << (-((b.disks1 - b.disks2) * weight) > 0 ? neuralnet_folder0 : neuralnet_folder1)
+			<< (-(b.disks1 - b.disks2) > 0 ? " BLACK" : " WHITE") << " WIN "
+			<< b.disks1 - b.disks2 << endl << endl;
 	}
 	cout << "RATE " << neuralnet_folder0 << " " << win0 * 100. / games << "%" <<
 		" : " << neuralnet_folder1 << " " << win1 * 100. / games << "%" << endl;

@@ -9329,7 +9329,7 @@ double AB_value(Board &b,
 		//return -betawd(b2, -x);
 		double value = -AB_value(next_b, neuralnet, disks, depth - 1, -bet, -alp, cut_ratio);
 		return max(alp, value);
-	}
+	
 	if (4 <= depth && disks <= 54 && move_number > 1) {
 		int sub_depth = min(max(0, (depth - 8)/2*2), max(0, int((52 - depth)/2)*2));
 		sort_boards(next_bs, neuralnet, disks + 1, sub_depth, cut_ratio);
@@ -9342,7 +9342,7 @@ double AB_value(Board &b,
 			return value;
 		}
 		if (alp < value) {
-			alp = value;			
+			alp = value;
 		}
 	}
 	return value;

@@ -1,0 +1,16 @@
+net:271,16,16,16,16,16,16,1
+learns:10000
+n_epoch:20
+games:200
+batch:256
+t:1
+a:0.000001
+bottom_disks:8
+top_disks:57
+playing_search_depth:4
+teaching_search_depth:6
+perfect_search_depth:14
+random:1
+show_time:5
+cut_ratio:0
+

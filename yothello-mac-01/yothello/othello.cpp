@@ -5294,7 +5294,6 @@ void Board::calculate_patterns()
 			}
 		}
 	}
-	
 }
 
 void Board::calculate_corners()

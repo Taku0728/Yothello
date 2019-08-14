@@ -1,0 +1,14 @@
+{
+    "name": "最弱オセロ",
+    "short_name": "最弱オセロ",
+    "icons": [
+        {
+            "src": "/static/icon512x512.png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/weak/",
+    "display": "standalone",
+    "theme_color": "#9CCC65",
+    "background_color": "#FFFFFF"
+}

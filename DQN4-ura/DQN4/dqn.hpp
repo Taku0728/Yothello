@@ -17,6 +17,9 @@
 #include <cmath>
 #include <chrono>
 #include <iomanip>
+#include "neuralnet.hpp"
+#include "math.hpp"
+#include "othello.hpp"
 // #include <amp.h>
 
 using  std::cout;
@@ -35,6 +38,24 @@ using std::normal_distribution;
 using std::ostringstream;
 
 void auto_play();
+
+void view_book();
+
+void surf_board(const Board &b,
+					map<string, pair<double, double> > &m,
+					map<string, pair<double, double> > &m2,
+					const double range,
+					const double step_cost);
+
+
+void explore_board(const Neuralnet neuralnet,
+					const Board &b,
+					map<string, pair<double, double> > &m,
+					const int depth,
+					const double cut_ratio,
+					const double range,
+					const double step_cost);
+
 
 void montecarlo_learn(const string neuralnet_folder);
 
